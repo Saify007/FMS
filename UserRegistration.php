@@ -27,7 +27,7 @@
             right: -10%;
             width: 500px;
             height: 500px;
-            background: radial-gradient(circle, rgba(167, 139, 250, 0.2) 0%, transparent 70%);
+            background: radial-gradient(circle, rgba(129, 140, 248, 0.2) 0%, transparent 70%);
             border-radius: 50%;
         }
         .auth-page::after {
@@ -37,7 +37,7 @@
             left: -5%;
             width: 400px;
             height: 400px;
-            background: radial-gradient(circle, rgba(139, 92, 246, 0.15) 0%, transparent 70%);
+            background: radial-gradient(circle, rgba(79, 70, 229, 0.15) 0%, transparent 70%);
             border-radius: 50%;
         }
         .auth-card {
@@ -163,6 +163,10 @@
     </style>
 </head>
 <body>
+<button class="fms-theme-toggle-fixed" onclick="window.forsetiTheme.toggle()" aria-label="Toggle dark mode" title="Toggle theme">
+  <i class="fas fa-sun"></i>
+  <i class="fas fa-moon"></i>
+</button>
 
 <?php
 if ($_SERVER["REQUEST_METHOD"] == "POST") {

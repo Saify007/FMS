@@ -1,61 +1,69 @@
 /* =====================================================
    FORSETI MANAGEMENT SYSTEM — DESIGN SYSTEM
-   White & Purple Glassmorphism Theme
+   Indigo Midnight — 60-30-10 Color System
+   Light & Dark Mode Support
    ===================================================== */
 
 /* -----------------------------------------------------
-   1. CSS Custom Properties
+   1. CSS Custom Properties — Semantic 60-30-10 System
    ----------------------------------------------------- */
 :root {
-  /* Purple Palette */
-  --purple-50: #f5f3ff;
-  --purple-100: #ede9fe;
-  --purple-200: #ddd6fe;
-  --purple-300: #c4b5fd;
-  --purple-400: #a78bfa;
-  --purple-500: #8b5cf6;
-  --purple-600: #7c3aed;
-  --purple-700: #6d28d9;
-  --purple-800: #5b21b6;
-  --purple-900: #4c1d95;
-  --purple-950: #2e1065;
+  /* 60% Dominant — Foundation & Backgrounds */
+  --dominant: #FAFAF9;
+  --dominant-rgb: 250, 250, 249;
 
-  /* Neutral Scale */
-  --white: #ffffff;
-  --off-white: #f8fafc;
-  --slate-50: #f8fafc;
-  --slate-100: #f1f5f9;
-  --slate-200: #e2e8f0;
-  --slate-300: #cbd5e1;
-  --slate-400: #94a3b8;
-  --slate-500: #64748b;
-  --slate-600: #475569;
-  --slate-700: #334155;
-  --slate-800: #1e293b;
-  --slate-900: #0f172a;
+  /* 30% Secondary — Layout Balance & Content Separation */
+  --secondary: #F5F5F4;
+  --secondary-rgb: 245, 245, 244;
 
-  /* Accent */
+  /* 10% Accent — Interactive Elements, CTAs, Focus */
+  --accent: #4F46E5;
+  --accent-rgb: 79, 70, 229;
+
+  /* Text Hierarchy */
+  --text-primary: #1C1917;
+  --text-secondary: #44403C;
+  --text-muted: #78716C;
+  --text-inverse: #FAFAF9;
+
+  /* Surfaces */
+  --surface: #FFFFFF;
+  --surface-elevated: #FAFAF9;
+  --surface-hover: #F5F5F4;
+
+  /* Borders */
+  --border-subtle: #E7E5E4;
+  --border-default: #D6D3D1;
+  --border-focus: var(--accent);
+
+  /* Accent Variants */
+  --accent-hover: #4338CA;
+  --accent-light: #E0E7FF;
+  --accent-glow: rgba(79, 70, 229, 0.35);
+
+  /* Functional */
+  --error: #EF4444;
+  --success: #10B981;
+  --warning: #F59E0B;
+  --info: #3B82F6;
   --gold: #fbbf24;
   --gold-light: #fcd34d;
-  --error: #ef4444;
-  --success: #10b981;
 
-  /* Glassmorphism */
-  --glass-white: rgba(255, 255, 255, 0.72);
-  --glass-white-strong: rgba(255, 255, 255, 0.88);
-  --glass-purple: rgba(124, 58, 237, 0.12);
-  --glass-border: rgba(255, 255, 255, 0.55);
+  /* Glassmorphism (Light) */
+  --glass-bg: rgba(255, 255, 255, 0.72);
+  --glass-bg-strong: rgba(255, 255, 255, 0.88);
+  --glass-border: rgba(255, 255, 255, 0.6);
   --glass-border-strong: rgba(255, 255, 255, 0.8);
-  --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.12);
-  --glass-shadow-lg: 0 12px 48px 0 rgba(31, 38, 135, 0.18);
+  --glass-shadow: 0 8px 32px 0 rgba(15, 23, 42, 0.08);
+  --glass-shadow-lg: 0 12px 48px 0 rgba(15, 23, 42, 0.12);
 
   /* Shadows */
   --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
   --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
   --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
-  --shadow-purple: 0 10px 40px -10px rgba(124, 58, 237, 0.25);
-  --shadow-purple-lg: 0 20px 60px -15px rgba(124, 58, 237, 0.35);
-  --shadow-button: 0 8px 25px -5px rgba(124, 58, 237, 0.4);
+  --shadow-accent: 0 10px 40px -10px rgba(79, 70, 229, 0.25);
+  --shadow-accent-lg: 0 20px 60px -15px rgba(79, 70, 229, 0.35);
+  --shadow-button: 0 8px 25px -5px rgba(79, 70, 229, 0.4);
 
   /* Border Radius */
   --radius-sm: 8px;
@@ -110,7 +118,63 @@
 }
 
 /* -----------------------------------------------------
-   2. Modern CSS Reset
+   2. Dark Mode Overrides
+   ----------------------------------------------------- */
+[data-theme="dark"] {
+  /* 60% Dominant */
+  --dominant: #0B0F19;
+  --dominant-rgb: 11, 15, 25;
+
+  /* 30% Secondary */
+  --secondary: #151B2B;
+  --secondary-rgb: 21, 27, 43;
+
+  /* 10% Accent */
+  --accent: #818CF8;
+  --accent-rgb: 129, 140, 248;
+
+  /* Text Hierarchy */
+  --text-primary: #F5F5F4;
+  --text-secondary: #E7E5E4;
+  --text-muted: #A8A29E;
+  --text-inverse: #0B0F19;
+
+  /* Surfaces */
+  --surface: #151B2B;
+  --surface-elevated: #1E293B;
+  --surface-hover: #334155;
+
+  /* Borders */
+  --border-subtle: #334155;
+  --border-default: #475569;
+  --border-focus: var(--accent);
+
+  /* Accent Variants */
+  --accent-hover: #A5B4FC;
+  --accent-light: rgba(129, 140, 248, 0.15);
+  --accent-glow: rgba(129, 140, 248, 0.4);
+
+  /* Glassmorphism (Dark) */
+  --glass-bg: rgba(21, 27, 43, 0.72);
+  --glass-bg-strong: rgba(21, 27, 43, 0.88);
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --glass-border-strong: rgba(255, 255, 255, 0.15);
+  --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+  --glass-shadow-lg: 0 12px 48px 0 rgba(0, 0, 0, 0.4);
+}
+
+/* -----------------------------------------------------
+   3. Theme Transition Utility
+   ----------------------------------------------------- */
+html.theme-transition,
+html.theme-transition *,
+html.theme-transition *::before,
+html.theme-transition *::after {
+  transition: background-color 0.5s ease, color 0.5s ease, border-color 0.5s ease, box-shadow 0.5s ease !important;
+}
+
+/* -----------------------------------------------------
+   4. Modern CSS Reset
    ----------------------------------------------------- */
 *,
 *::before,
@@ -131,8 +195,8 @@ body {
   font-family: var(--font-body);
   font-size: var(--text-base);
   line-height: var(--line-normal);
-  color: var(--slate-800);
-  background: var(--purple-50);
+  color: var(--text-primary);
+  background: var(--dominant);
   min-height: 100vh;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -175,25 +239,25 @@ h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-heading);
   font-weight: 700;
   line-height: var(--line-tight);
-  color: var(--slate-900);
+  color: var(--text-primary);
 }
 
 p {
-  color: var(--slate-600);
+  color: var(--text-secondary);
 }
 
 /* Focus styles for accessibility */
 :focus-visible {
-  outline: 2px solid var(--purple-500);
+  outline: 2px solid var(--accent);
   outline-offset: 2px;
 }
 
 /* -----------------------------------------------------
-   3. Background System
+   5. Background System
    ----------------------------------------------------- */
 .fms-page {
   min-height: 100vh;
-  background: linear-gradient(135deg, var(--purple-50) 0%, var(--white) 50%, var(--purple-100) 100%);
+  background: linear-gradient(135deg, var(--dominant) 0%, var(--surface) 50%, var(--secondary) 100%);
   position: relative;
   overflow-x: hidden;
 }
@@ -205,7 +269,7 @@ p {
   right: -10%;
   width: 600px;
   height: 600px;
-  background: radial-gradient(circle, rgba(124, 58, 237, 0.12) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(79, 70, 229, 0.12) 0%, transparent 70%);
   border-radius: 50%;
   pointer-events: none;
   z-index: 0;
@@ -218,14 +282,26 @@ p {
   left: -5%;
   width: 500px;
   height: 500px;
-  background: radial-gradient(circle, rgba(167, 139, 250, 0.15) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(129, 140, 248, 0.15) 0%, transparent 70%);
   border-radius: 50%;
   pointer-events: none;
   z-index: 0;
 }
 
+[data-theme="dark"] .fms-page {
+  background: linear-gradient(135deg, var(--dominant) 0%, #070A10 50%, var(--secondary) 100%);
+}
+
+[data-theme="dark"] .fms-page::before {
+  background: radial-gradient(circle, rgba(129, 140, 248, 0.08) 0%, transparent 70%);
+}
+
+[data-theme="dark"] .fms-page::after {
+  background: radial-gradient(circle, rgba(79, 70, 229, 0.1) 0%, transparent 70%);
+}
+
 .fms-page-purple {
-  background: linear-gradient(135deg, var(--purple-700) 0%, var(--purple-800) 50%, var(--purple-900) 100%);
+  background: linear-gradient(135deg, #312E81 0%, #1E1B4B 50%, #0F0D2A 100%);
 }
 
 .fms-page-purple::before {
@@ -233,14 +309,18 @@ p {
 }
 
 .fms-page-purple::after {
-  background: radial-gradient(circle, rgba(139, 92, 246, 0.2) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(129, 140, 248, 0.2) 0%, transparent 70%);
+}
+
+[data-theme="dark"] .fms-page-purple {
+  background: linear-gradient(135deg, #1E1B4B 0%, #0F0D2A 50%, #070A10 100%);
 }
 
 /* -----------------------------------------------------
-   4. Glassmorphism Utilities
+   6. Glassmorphism Utilities
    ----------------------------------------------------- */
 .glass {
-  background: var(--glass-white);
+  background: var(--glass-bg);
   backdrop-filter: blur(20px) saturate(180%);
   -webkit-backdrop-filter: blur(20px) saturate(180%);
   border: 1px solid var(--glass-border);
@@ -248,7 +328,7 @@ p {
 }
 
 .glass-strong {
-  background: var(--glass-white-strong);
+  background: var(--glass-bg-strong);
   backdrop-filter: blur(24px) saturate(200%);
   -webkit-backdrop-filter: blur(24px) saturate(200%);
   border: 1px solid var(--glass-border-strong);
@@ -256,20 +336,20 @@ p {
 }
 
 .glass-purple {
-  background: var(--glass-purple);
+  background: var(--accent-light);
   backdrop-filter: blur(16px) saturate(180%);
   -webkit-backdrop-filter: blur(16px) saturate(180%);
-  border: 1px solid rgba(167, 139, 250, 0.25);
-  box-shadow: 0 8px 32px 0 rgba(124, 58, 237, 0.15);
+  border: 1px solid rgba(129, 140, 248, 0.25);
+  box-shadow: 0 8px 32px 0 rgba(79, 70, 229, 0.15);
 }
 
 .glass-dark {
-  background: rgba(15, 23, 42, 0.65);
+  background: rgba(11, 15, 25, 0.65);
   backdrop-filter: blur(20px) saturate(180%);
   -webkit-backdrop-filter: blur(20px) saturate(180%);
   border: 1px solid rgba(255, 255, 255, 0.1);
   box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
-  color: var(--white);
+  color: var(--text-inverse);
 }
 
 .glass-dark h1,
@@ -278,28 +358,28 @@ p {
 .glass-dark h4,
 .glass-dark h5,
 .glass-dark h6 {
-  color: var(--white);
+  color: var(--text-inverse);
 }
 
 .glass-dark p {
-  color: var(--slate-300);
+  color: var(--text-secondary);
 }
 
 /* -----------------------------------------------------
-   5. Card Component
+   7. Card Component
    ----------------------------------------------------- */
 .fms-card {
-  background: var(--white);
+  background: var(--surface);
   border-radius: var(--radius-xl);
   padding: var(--space-8);
-  box-shadow: var(--shadow-purple);
-  border: 1px solid var(--purple-100);
+  box-shadow: var(--shadow-accent);
+  border: 1px solid var(--border-subtle);
   transition: transform var(--transition-base), box-shadow var(--transition-base);
 }
 
 .fms-card:hover {
   transform: translateY(-4px);
-  box-shadow: var(--shadow-purple-lg);
+  box-shadow: var(--shadow-accent-lg);
 }
 
 .fms-card-glass {
@@ -315,7 +395,7 @@ p {
 }
 
 /* -----------------------------------------------------
-   6. Button Components
+   8. Button Components
    ----------------------------------------------------- */
 .fms-btn {
   display: inline-flex;
@@ -348,38 +428,38 @@ p {
 }
 
 .fms-btn-primary {
-  background: linear-gradient(135deg, var(--purple-600) 0%, var(--purple-700) 100%);
-  color: var(--white);
-  box-shadow: 0 4px 14px 0 rgba(124, 58, 237, 0.39);
+  background: linear-gradient(135deg, var(--accent) 0%, var(--accent-hover) 100%);
+  color: var(--text-inverse);
+  box-shadow: 0 4px 14px 0 rgba(79, 70, 229, 0.39);
 }
 
 .fms-btn-primary:hover {
-  background: linear-gradient(135deg, var(--purple-700) 0%, var(--purple-800) 100%);
+  background: linear-gradient(135deg, var(--accent-hover) 0%, #3730A3 100%);
   box-shadow: var(--shadow-button);
   transform: translateY(-2px);
 }
 
 .fms-btn-secondary {
-  background: var(--white);
-  color: var(--purple-700);
-  border: 2px solid var(--purple-200);
+  background: var(--surface);
+  color: var(--accent);
+  border: 2px solid var(--border-subtle);
   box-shadow: var(--shadow-sm);
 }
 
 .fms-btn-secondary:hover {
-  border-color: var(--purple-400);
-  background: var(--purple-50);
+  border-color: var(--accent);
+  background: var(--accent-light);
   transform: translateY(-2px);
   box-shadow: var(--shadow-md);
 }
 
 .fms-btn-ghost {
   background: transparent;
-  color: var(--purple-700);
+  color: var(--accent);
 }
 
 .fms-btn-ghost:hover {
-  background: var(--purple-100);
+  background: var(--accent-light);
 }
 
 .fms-btn-lg {
@@ -395,7 +475,7 @@ p {
 }
 
 /* -----------------------------------------------------
-   7. Form Components
+   9. Form Components
    ----------------------------------------------------- */
 .fms-form {
   display: flex;
@@ -413,14 +493,14 @@ p {
   font-family: var(--font-heading);
   font-weight: 600;
   font-size: var(--text-sm);
-  color: var(--slate-700);
+  color: var(--text-secondary);
   display: flex;
   align-items: center;
   gap: var(--space-2);
 }
 
 .fms-label i {
-  color: var(--purple-500);
+  color: var(--accent);
   font-size: var(--text-sm);
 }
 
@@ -430,9 +510,9 @@ p {
   width: 100%;
   padding: var(--space-3) var(--space-4);
   font-size: var(--text-base);
-  color: var(--slate-800);
-  background: var(--white);
-  border: 2px solid var(--slate-200);
+  color: var(--text-primary);
+  background: var(--surface);
+  border: 2px solid var(--border-default);
   border-radius: var(--radius-md);
   transition: all var(--transition-base);
   outline: none;
@@ -440,21 +520,27 @@ p {
 
 .fms-input::placeholder,
 .fms-textarea::placeholder {
-  color: var(--slate-400);
+  color: var(--text-muted);
 }
 
 .fms-input:hover,
 .fms-select:hover,
 .fms-textarea:hover {
-  border-color: var(--purple-300);
+  border-color: var(--accent-light);
 }
 
 .fms-input:focus,
 .fms-select:focus,
 .fms-textarea:focus {
-  border-color: var(--purple-500);
-  box-shadow: 0 0 0 4px rgba(124, 58, 237, 0.1);
-  background: var(--white);
+  border-color: var(--accent);
+  box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.1);
+  background: var(--surface);
+}
+
+[data-theme="dark"] .fms-input:focus,
+[data-theme="dark"] .fms-select:focus,
+[data-theme="dark"] .fms-textarea:focus {
+  box-shadow: 0 0 0 4px rgba(129, 140, 248, 0.15);
 }
 
 .fms-textarea {
@@ -464,11 +550,15 @@ p {
 
 .fms-select {
   appearance: none;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%2364748b' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%2378716C' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
   background-repeat: no-repeat;
   background-position: right 12px center;
   background-size: 16px;
   padding-right: var(--space-10);
+}
+
+[data-theme="dark"] .fms-select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23A8A29E' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
 }
 
 .fms-error {
@@ -488,7 +578,7 @@ p {
   width: 16px;
   height: 16px;
   background: var(--error);
-  color: var(--white);
+  color: var(--text-inverse);
   border-radius: 50%;
   font-size: 10px;
   font-weight: 700;
@@ -520,7 +610,7 @@ p {
   gap: var(--space-2);
   cursor: pointer;
   font-size: var(--text-sm);
-  color: var(--slate-700);
+  color: var(--text-secondary);
   font-weight: 500;
 }
 
@@ -528,12 +618,12 @@ p {
 .fms-checkbox input {
   width: 18px;
   height: 18px;
-  accent-color: var(--purple-600);
+  accent-color: var(--accent);
   cursor: pointer;
 }
 
 /* -----------------------------------------------------
-   8. Navigation
+   10. Navigation
    ----------------------------------------------------- */
 .fms-nav {
   position: fixed;
@@ -546,7 +636,7 @@ p {
 }
 
 .fms-nav.scrolled {
-  background: var(--glass-white-strong);
+  background: var(--glass-bg-strong);
   backdrop-filter: blur(20px) saturate(180%);
   -webkit-backdrop-filter: blur(20px) saturate(180%);
   box-shadow: var(--shadow-md);
@@ -570,7 +660,7 @@ p {
   font-family: var(--font-heading);
   font-weight: 700;
   font-size: var(--text-xl);
-  color: var(--purple-800);
+  color: var(--text-primary);
   transition: color var(--transition-base);
 }
 
@@ -580,7 +670,7 @@ p {
 }
 
 .fms-logo:hover {
-  color: var(--purple-600);
+  color: var(--accent);
 }
 
 .fms-nav-links {
@@ -594,7 +684,7 @@ p {
   font-family: var(--font-heading);
   font-weight: 500;
   font-size: var(--text-sm);
-  color: var(--slate-700);
+  color: var(--text-secondary);
   border-radius: var(--radius-md);
   transition: all var(--transition-base);
   position: relative;
@@ -607,7 +697,7 @@ p {
   left: 50%;
   width: 0;
   height: 2px;
-  background: linear-gradient(90deg, var(--purple-500), var(--purple-700));
+  background: linear-gradient(90deg, var(--accent), var(--accent-hover));
   transition: all var(--transition-base);
   transform: translateX(-50%);
   border-radius: var(--radius-full);
@@ -615,8 +705,8 @@ p {
 
 .fms-nav-link:hover,
 .fms-nav-link.active {
-  color: var(--purple-700);
-  background: var(--purple-50);
+  color: var(--accent);
+  background: var(--accent-light);
 }
 
 .fms-nav-link:hover::after,
@@ -641,7 +731,7 @@ p {
   display: block;
   width: 24px;
   height: 2px;
-  background: var(--purple-800);
+  background: var(--text-primary);
   border-radius: 2px;
   transition: all var(--transition-base);
 }
@@ -658,8 +748,47 @@ p {
   transform: rotate(-45deg) translate(5px, -5px);
 }
 
+/* Theme Toggle Button */
+.fms-theme-toggle {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-md);
+  background: transparent;
+  color: var(--text-secondary);
+  font-size: var(--text-lg);
+  border: 1px solid var(--border-subtle);
+  transition: all var(--transition-base);
+  cursor: pointer;
+  margin-left: var(--space-2);
+}
+
+.fms-theme-toggle:hover {
+  background: var(--accent-light);
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+.fms-theme-toggle .fa-sun {
+  display: block;
+}
+
+.fms-theme-toggle .fa-moon {
+  display: none;
+}
+
+[data-theme="dark"] .fms-theme-toggle .fa-sun {
+  display: none;
+}
+
+[data-theme="dark"] .fms-theme-toggle .fa-moon {
+  display: block;
+}
+
 /* -----------------------------------------------------
-   9. Layout Utilities
+   11. Layout Utilities
    ----------------------------------------------------- */
 .fms-container {
   max-width: var(--container-max);
@@ -743,13 +872,13 @@ p {
 }
 
 /* -----------------------------------------------------
-   10. Typography Utilities
+   12. Typography Utilities
    ----------------------------------------------------- */
 .fms-title-xl {
   font-family: var(--font-display);
   font-size: var(--text-5xl);
   font-weight: 700;
-  color: var(--purple-900);
+  color: var(--text-primary);
   line-height: 1.1;
   letter-spacing: -0.02em;
 }
@@ -758,7 +887,7 @@ p {
   font-family: var(--font-heading);
   font-size: var(--text-4xl);
   font-weight: 700;
-  color: var(--purple-900);
+  color: var(--text-primary);
   line-height: 1.15;
 }
 
@@ -766,7 +895,7 @@ p {
   font-family: var(--font-heading);
   font-size: var(--text-3xl);
   font-weight: 700;
-  color: var(--purple-800);
+  color: var(--text-primary);
   line-height: 1.2;
 }
 
@@ -774,12 +903,12 @@ p {
   font-family: var(--font-heading);
   font-size: var(--text-2xl);
   font-weight: 600;
-  color: var(--purple-800);
+  color: var(--text-primary);
 }
 
 .fms-subtitle {
   font-size: var(--text-lg);
-  color: var(--slate-500);
+  color: var(--text-muted);
   max-width: 600px;
   line-height: var(--line-relaxed);
 }
@@ -789,8 +918,8 @@ p {
   align-items: center;
   gap: var(--space-1);
   padding: var(--space-1) var(--space-3);
-  background: var(--purple-100);
-  color: var(--purple-700);
+  background: var(--accent-light);
+  color: var(--accent);
   font-family: var(--font-heading);
   font-size: var(--text-xs);
   font-weight: 600;
@@ -800,11 +929,11 @@ p {
 }
 
 /* -----------------------------------------------------
-   11. Footer
+   13. Footer
    ----------------------------------------------------- */
 .fms-footer {
-  background: linear-gradient(135deg, var(--purple-900) 0%, var(--purple-950) 100%);
-  color: var(--slate-300);
+  background: linear-gradient(135deg, #1E1B4B 0%, #0F0D2A 100%);
+  color: var(--text-muted);
   padding: var(--space-16) 0 var(--space-8);
   position: relative;
   overflow: hidden;
@@ -817,8 +946,16 @@ p {
   right: -100px;
   width: 300px;
   height: 300px;
-  background: radial-gradient(circle, rgba(124, 58, 237, 0.3) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(79, 70, 229, 0.3) 0%, transparent 70%);
   border-radius: 50%;
+}
+
+[data-theme="dark"] .fms-footer {
+  background: linear-gradient(135deg, #0B0F19 0%, #070A10 100%);
+}
+
+[data-theme="dark"] .fms-footer::before {
+  background: radial-gradient(circle, rgba(129, 140, 248, 0.15) 0%, transparent 70%);
 }
 
 .fms-footer-grid {
@@ -835,12 +972,12 @@ p {
 }
 
 .fms-footer-brand h3 {
-  color: var(--white);
+  color: var(--text-inverse);
   font-size: var(--text-xl);
 }
 
 .fms-footer-brand p {
-  color: var(--slate-400);
+  color: var(--text-muted);
   font-size: var(--text-sm);
   line-height: var(--line-relaxed);
 }
@@ -859,18 +996,18 @@ p {
   justify-content: center;
   border-radius: var(--radius-md);
   background: rgba(255, 255, 255, 0.1);
-  color: var(--white);
+  color: var(--text-inverse);
   font-size: var(--text-lg);
   transition: all var(--transition-base);
 }
 
 .fms-footer-social a:hover {
-  background: var(--purple-500);
+  background: var(--accent);
   transform: translateY(-3px);
 }
 
 .fms-footer-links h4 {
-  color: var(--white);
+  color: var(--text-inverse);
   font-size: var(--text-sm);
   text-transform: uppercase;
   letter-spacing: 0.05em;
@@ -884,13 +1021,13 @@ p {
 }
 
 .fms-footer-links a {
-  color: var(--slate-400);
+  color: var(--text-muted);
   font-size: var(--text-sm);
   transition: color var(--transition-base);
 }
 
 .fms-footer-links a:hover {
-  color: var(--white);
+  color: var(--text-inverse);
 }
 
 .fms-footer-bottom {
@@ -900,11 +1037,11 @@ p {
   justify-content: space-between;
   align-items: center;
   font-size: var(--text-sm);
-  color: var(--slate-500);
+  color: var(--text-muted);
 }
 
 /* -----------------------------------------------------
-   12. Animations
+   14. Animations
    ----------------------------------------------------- */
 @keyframes fadeInUp {
   from {
@@ -950,8 +1087,8 @@ p {
 }
 
 @keyframes pulse-glow {
-  0%, 100% { box-shadow: 0 0 20px rgba(124, 58, 237, 0.2); }
-  50% { box-shadow: 0 0 40px rgba(124, 58, 237, 0.4); }
+  0%, 100% { box-shadow: 0 0 20px rgba(79, 70, 229, 0.2); }
+  50% { box-shadow: 0 0 40px rgba(79, 70, 229, 0.4); }
 }
 
 @keyframes scaleIn {
@@ -1018,7 +1155,7 @@ p {
 }
 
 /* -----------------------------------------------------
-   13. Star Rating (for rate.html)
+   15. Star Rating (for rate.html)
    ----------------------------------------------------- */
 .fms-star-rating {
   display: flex;
@@ -1033,7 +1170,7 @@ p {
 
 .fms-star-rating label {
   font-size: var(--text-4xl);
-  color: var(--slate-300);
+  color: var(--border-default);
   cursor: pointer;
   transition: all var(--transition-fast);
   line-height: 1;
@@ -1051,17 +1188,17 @@ p {
   font-family: var(--font-heading);
   font-size: var(--text-2xl);
   font-weight: 600;
-  color: var(--purple-800);
+  color: var(--text-primary);
   text-align: center;
   min-height: 40px;
 }
 
 /* -----------------------------------------------------
-   14. Misc Components
+   16. Misc Components
    ----------------------------------------------------- */
 .fms-divider {
   height: 1px;
-  background: linear-gradient(90deg, transparent, var(--purple-200), transparent);
+  background: linear-gradient(90deg, transparent, var(--border-subtle), transparent);
   margin: var(--space-8) 0;
 }
 
@@ -1070,15 +1207,15 @@ p {
   height: 48px;
   border-radius: 50%;
   object-fit: cover;
-  border: 2px solid var(--purple-200);
+  border: 2px solid var(--border-subtle);
 }
 
 .fms-tag {
   display: inline-flex;
   align-items: center;
   padding: var(--space-1) var(--space-3);
-  background: var(--purple-100);
-  color: var(--purple-700);
+  background: var(--accent-light);
+  color: var(--accent);
   font-size: var(--text-xs);
   font-weight: 600;
   border-radius: var(--radius-full);
@@ -1090,8 +1227,8 @@ p {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, var(--purple-100) 0%, var(--purple-200) 100%);
-  color: var(--purple-700);
+  background: linear-gradient(135deg, var(--accent-light) 0%, rgba(79, 70, 229, 0.15) 100%);
+  color: var(--accent);
   border-radius: var(--radius-lg);
   font-size: var(--text-xl);
   transition: all var(--transition-base);
@@ -1099,7 +1236,7 @@ p {
 
 .fms-icon-box:hover {
   transform: scale(1.1) rotate(5deg);
-  box-shadow: var(--shadow-purple);
+  box-shadow: var(--shadow-accent);
 }
 
 /* Checkout summary card */
@@ -1107,18 +1244,18 @@ p {
   display: flex;
   justify-content: space-between;
   padding: var(--space-3) 0;
-  border-bottom: 1px solid var(--slate-100);
+  border-bottom: 1px solid var(--border-subtle);
 }
 
 .fms-summary-row:last-child {
   border-bottom: none;
   font-weight: 700;
-  color: var(--purple-800);
+  color: var(--text-primary);
   font-size: var(--text-lg);
 }
 
 /* -----------------------------------------------------
-   15. Responsive Design
+   17. Responsive Design
    ----------------------------------------------------- */
 @media (max-width: 1024px) {
   .fms-grid-4 {
@@ -1145,7 +1282,7 @@ p {
     left: 0;
     right: 0;
     bottom: 0;
-    background: var(--glass-white-strong);
+    background: var(--glass-bg-strong);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     flex-direction: column;
@@ -1214,7 +1351,7 @@ p {
 }
 
 /* -----------------------------------------------------
-   16. Fallbacks for older browsers
+   18. Fallbacks for older browsers
    ----------------------------------------------------- */
 @supports not (backdrop-filter: blur(20px)) {
   .glass,
@@ -1222,25 +1359,75 @@ p {
   .glass-purple,
   .glass-dark,
   .fms-nav.scrolled {
-    background: rgba(255, 255, 255, 0.95);
+    background: var(--surface);
   }
 
   .glass-purple {
-    background: rgba(245, 243, 255, 0.95);
+    background: var(--accent-light);
   }
 
   .glass-dark {
-    background: rgba(15, 23, 42, 0.9);
+    background: rgba(11, 15, 25, 0.9);
   }
 }
 
 /* -----------------------------------------------------
-   17. Print styles
+   19. Floating Theme Toggle (for pages without nav)
+   ----------------------------------------------------- */
+.fms-theme-toggle-fixed {
+  position: fixed;
+  top: var(--space-4);
+  right: var(--space-4);
+  z-index: 1000;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-md);
+  background: var(--glass-bg-strong);
+  backdrop-filter: blur(12px) saturate(180%);
+  -webkit-backdrop-filter: blur(12px) saturate(180%);
+  border: 1px solid var(--glass-border);
+  color: var(--text-secondary);
+  font-size: var(--text-lg);
+  box-shadow: var(--glass-shadow);
+  transition: all var(--transition-base);
+  cursor: pointer;
+}
+
+.fms-theme-toggle-fixed:hover {
+  background: var(--accent-light);
+  color: var(--accent);
+  border-color: var(--accent);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-accent);
+}
+
+.fms-theme-toggle-fixed .fa-sun {
+  display: block;
+}
+
+.fms-theme-toggle-fixed .fa-moon {
+  display: none;
+}
+
+[data-theme="dark"] .fms-theme-toggle-fixed .fa-sun {
+  display: none;
+}
+
+[data-theme="dark"] .fms-theme-toggle-fixed .fa-moon {
+  display: block;
+}
+
+/* -----------------------------------------------------
+   20. Print styles
    ----------------------------------------------------- */
 @media print {
   .fms-nav,
   .fms-footer,
-  .fms-nav-toggle {
+  .fms-nav-toggle,
+  .fms-theme-toggle {
     display: none !important;
   }
 
@@ -1253,4 +1440,38 @@ p {
     background: white;
     color: black;
   }
+}
+
+/* -----------------------------------------------------
+   20. Backwards Compatibility Aliases
+   ----------------------------------------------------- */
+:root {
+  --purple-50: var(--accent-light);
+  --purple-100: var(--accent-light);
+  --purple-200: var(--border-subtle);
+  --purple-300: var(--accent-light);
+  --purple-400: var(--accent);
+  --purple-500: var(--accent);
+  --purple-600: var(--accent);
+  --purple-700: var(--accent-hover);
+  --purple-800: var(--text-primary);
+  --purple-900: var(--text-primary);
+  --purple-950: var(--dominant);
+  --white: var(--surface);
+  --off-white: var(--dominant);
+  --slate-50: var(--dominant);
+  --slate-100: var(--secondary);
+  --slate-200: var(--border-subtle);
+  --slate-300: var(--border-default);
+  --slate-400: var(--text-muted);
+  --slate-500: var(--text-muted);
+  --slate-600: var(--text-secondary);
+  --slate-700: var(--text-secondary);
+  --slate-800: var(--text-primary);
+  --slate-900: var(--text-primary);
+  --glass-white: var(--glass-bg);
+  --glass-white-strong: var(--glass-bg-strong);
+  --glass-purple: var(--accent-light);
+  --shadow-purple: var(--shadow-accent);
+  --shadow-purple-lg: var(--shadow-accent-lg);
 }

@@ -116,6 +116,10 @@
                 <a href="index.html" class="fms-btn fms-btn-secondary fms-nav-cta fms-btn-sm">
                     <i class="fas fa-sign-out-alt"></i> Logout
                 </a>
+                <button class="fms-theme-toggle" aria-label="Toggle dark mode" title="Toggle theme">
+                    <i class="fas fa-sun"></i>
+                    <i class="fas fa-moon"></i>
+                </button>
             </div>
         </div>
     </nav>
