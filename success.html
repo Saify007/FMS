@@ -1,24 +1,116 @@
-
 <!DOCTYPE html>
-
-<html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Successful | Forseti</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="css/design-system.css">
+    <style>
+        .success-page {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: var(--space-4);
+            background: linear-gradient(135deg, var(--purple-700) 0%, var(--purple-800) 50%, var(--purple-900) 100%);
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+        }
+        .success-page::before {
+            content: '';
+            position: absolute;
+            top: -10%;
+            right: -10%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(167, 139, 250, 0.2) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+        .success-page::after {
+            content: '';
+            position: absolute;
+            bottom: -10%;
+            left: -5%;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(139, 92, 246, 0.15) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+        .success-card {
+            width: 100%;
+            max-width: 480px;
+            padding: var(--space-12);
+            animation: scaleIn 0.6s ease-out;
+            position: relative;
+            z-index: 1;
+        }
+        .success-icon {
+            width: 100px;
+            height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, var(--success) 0%, #059669 100%);
+            color: var(--white);
+            border-radius: 50%;
+            font-size: var(--text-4xl);
+            margin: 0 auto var(--space-6);
+            box-shadow: 0 12px 32px rgba(16, 185, 129, 0.3);
+            animation: float 3s ease-in-out infinite;
+        }
+        .success-card h1 {
+            font-size: var(--text-3xl);
+            color: var(--purple-900);
+            margin-bottom: var(--space-3);
+        }
+        .success-card p {
+            color: var(--slate-500);
+            font-size: var(--text-lg);
+            line-height: var(--line-relaxed);
+            margin-bottom: var(--space-8);
+        }
+        .success-actions {
+            display: flex;
+            gap: var(--space-3);
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        @media (max-width: 480px) {
+            .success-card {
+                padding: var(--space-8) var(--space-6);
+            }
+            .success-actions {
+                flex-direction: column;
+            }
+            .success-actions .fms-btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
 <body>
-
-<style>
-html,body{
-    display: gird;
-    height: 100%;
-    width: 100%;
-    place-items: center;
-    text-align: center;
-  background-image: url('asset/success.gif');
-}
- </style>
-    
-        <h1>Success</h1> 
-        <p>We received your payment ;<br/> we'll be in touch shortly!</p>
-      </div>
-    </body>
+    <main class="success-page">
+        <div class="glass-strong success-card">
+            <div class="success-icon">
+                <i class="fas fa-check"></i>
+            </div>
+            <h1>Payment Successful!</h1>
+            <p>We have received your payment. Our team will be in touch with you shortly to proceed with your case.</p>
+            <div class="success-actions">
+                <a href="index.html" class="fms-btn fms-btn-primary fms-btn-lg">
+                    <i class="fas fa-home"></i> Back to Home
+                </a>
+                <a href="rate.html" class="fms-btn fms-btn-secondary fms-btn-lg">
+                    <i class="fas fa-star"></i> Rate Your Lawyer
+                </a>
+            </div>
+        </div>
+    </main>
+    <script src="js/main.js"></script>
+</body>
 </html>
-
-

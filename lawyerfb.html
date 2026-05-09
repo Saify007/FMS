@@ -1,42 +1,134 @@
-<!--TRANSATION 2 PART START-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    
-    <title>Forseti</title>
-
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lawyer Feedback | Forseti</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="css/design-system.css">
+    <style>
+        .feedback-page {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: calc(var(--header-height) + var(--space-8)) var(--space-4) var(--space-8);
+            background: linear-gradient(135deg, var(--purple-700) 0%, var(--purple-800) 50%, var(--purple-900) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        .feedback-page::before {
+            content: '';
+            position: absolute;
+            top: -10%;
+            right: -10%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(167, 139, 250, 0.2) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+        .feedback-card {
+            width: 100%;
+            max-width: 560px;
+            padding: var(--space-10);
+            animation: scaleIn 0.5s ease-out;
+            position: relative;
+            z-index: 1;
+        }
+        .feedback-header {
+            text-align: center;
+            margin-bottom: var(--space-8);
+        }
+        .feedback-header .feedback-icon {
+            width: 72px;
+            height: 72px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, var(--purple-500) 0%, var(--purple-600) 100%);
+            color: var(--white);
+            border-radius: var(--radius-lg);
+            font-size: var(--text-3xl);
+            margin: 0 auto var(--space-4);
+            box-shadow: var(--shadow-purple);
+        }
+        .feedback-header h1 {
+            font-size: var(--text-2xl);
+            color: var(--purple-900);
+            margin-bottom: var(--space-2);
+        }
+        .feedback-header p {
+            font-size: var(--text-sm);
+            color: var(--slate-500);
+        }
+        .rating-input {
+            display: flex;
+            align-items: center;
+            gap: var(--space-2);
+        }
+        .rating-input input {
+            flex: 1;
+            padding: var(--space-3) var(--space-4);
+            font-size: var(--text-base);
+            border: 2px solid var(--slate-200);
+            border-radius: var(--radius-md);
+            transition: all var(--transition-base);
+            outline: none;
+        }
+        .rating-input input:focus {
+            border-color: var(--purple-500);
+            box-shadow: 0 0 0 4px rgba(124, 58, 237, 0.1);
+        }
+        .rating-input span {
+            font-family: var(--font-heading);
+            font-weight: 700;
+            font-size: var(--text-xl);
+            color: var(--purple-700);
+        }
+        @media (max-width: 480px) {
+            .feedback-card {
+                padding: var(--space-6);
+            }
+        }
+    </style>
 </head>
 <body>
 
-   
-<!--  Reviews Part   ---->
+    <main class="feedback-page">
+        <div class="glass-strong feedback-card">
+            <div class="feedback-header">
+                <div class="feedback-icon">
+                    <i class="fas fa-star"></i>
+                </div>
+                <h1>Lawyer's Feedback</h1>
+                <p>Share your experience and help us improve our services.</p>
+            </div>
 
-<h3>Lawyer's Reviews</h3>
+            <form action="checkout.html" class="fms-form">
+                <div class="fms-form-group">
+                    <label class="fms-label"><i class="fas fa-star"></i> Rate Your Lawyer</label>
+                    <div class="rating-input">
+                        <input type="number" name="rating" min="1" max="5" placeholder="1-5">
+                        <span>/ 5</span>
+                    </div>
+                    <p style="font-size: var(--text-xs); color: var(--slate-400); margin-top: var(--space-1);">Enter a number between 1 and 5</p>
+                </div>
 
-    
-    <p> Rates Your Lawyer Out Of 5:</p>
+                <div class="fms-form-group">
+                    <label class="fms-label"><i class="fas fa-comment"></i> Your Feedback</label>
+                    <textarea name="feedback" class="fms-textarea" placeholder="Write something about your experience with your lawyer..."></textarea>
+                </div>
 
+                <button type="submit" class="fms-btn fms-btn-primary fms-btn-lg" style="width: 100%;">
+                    <i class="fas fa-paper-plane"></i> Submit Feedback
+                </button>
+            </form>
+        </div>
+    </main>
 
-
-<br><br> <label for="Rating">Rating</label> <br>
-    <textarea id="subject" name="Feedback" placeholder="Input Number" style="height:100px"></textarea>
-    
-    <!--  FeedBack Form Part   ---->
-
-
-    <h3>Lawyer's Feedback</h3>
-
-
-
-    <label for="Feedback">Feedback</label> <br>
-    <textarea id="subject" name="Feedback" placeholder="Write something About Your Experience With Your Lawyer..." style="height:100px"></textarea>
-
-    <br>
-    <a href="checkout.html"> Submit</a> 
-
-
-
-
+    <script src="js/main.js"></script>
 </body>
 </html>

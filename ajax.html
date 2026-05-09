@@ -1,88 +1,180 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<title> AJAX CASE BOX</title>
-<script>
-function postComment() {
-    // Creating the XMLHttpRequest object
-    var request = new XMLHttpRequest();
-    
-    // Instantiating the request object
-    request.open("POST", "confirmation.php");
-    
-    // Defining event listener for readystatechange event
-    request.onreadystatechange = function() {
-        // Check if the request is compete and was successful
-        if(this.readyState === 4 && this.status === 200) {
-            // Inserting the response from server into an HTML element
-            document.getElementById("result").innerHTML = this.responseText;
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Complaint Box | Forseti</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="css/design-system.css">
+    <style>
+        .complaint-page {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: calc(var(--header-height) + var(--space-8)) var(--space-4) var(--space-8);
+            background: linear-gradient(135deg, var(--purple-700) 0%, var(--purple-800) 50%, var(--purple-900) 100%);
+            position: relative;
+            overflow: hidden;
         }
-    };
-    
-    // Retrieving the form data
-    var myForm = document.getElementById("myForm");
-    var formData = new FormData(myForm);
-
-    // Sending the request to the server
-    request.send(formData);
-}
-</script>
+        .complaint-page::before {
+            content: '';
+            position: absolute;
+            top: -10%;
+            right: -10%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(167, 139, 250, 0.2) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+        .complaint-card {
+            width: 100%;
+            max-width: 560px;
+            padding: var(--space-10);
+            animation: scaleIn 0.5s ease-out;
+            position: relative;
+            z-index: 1;
+        }
+        .complaint-header {
+            text-align: center;
+            margin-bottom: var(--space-8);
+        }
+        .complaint-header .complaint-icon {
+            width: 72px;
+            height: 72px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #ef4444 0%, #b91c1c 100%);
+            color: var(--white);
+            border-radius: var(--radius-lg);
+            font-size: var(--text-3xl);
+            margin: 0 auto var(--space-4);
+            box-shadow: 0 8px 24px rgba(239, 68, 68, 0.3);
+            animation: float 3s ease-in-out infinite;
+        }
+        .complaint-header h1 {
+            font-size: var(--text-2xl);
+            color: var(--purple-900);
+            margin-bottom: var(--space-2);
+        }
+        .complaint-header p {
+            font-size: var(--text-sm);
+            color: var(--slate-500);
+        }
+        .complaint-result {
+            margin-top: var(--space-6);
+            padding: var(--space-4);
+            background: var(--purple-50);
+            border-radius: var(--radius-md);
+            border-left: 4px solid var(--purple-500);
+            min-height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: var(--text-sm);
+            color: var(--slate-600);
+        }
+        .complaint-actions {
+            display: flex;
+            gap: var(--space-4);
+            margin-top: var(--space-6);
+            flex-wrap: wrap;
+        }
+        .complaint-actions .fms-btn {
+            flex: 1;
+            min-width: 140px;
+        }
+        @media (max-width: 480px) {
+            .complaint-card {
+                padding: var(--space-6);
+            }
+            .complaint-actions {
+                flex-direction: column;
+            }
+            .complaint-actions .fms-btn {
+                width: 100%;
+            }
+        }
+    </style>
 </head>
 <body>
-    <form id="myForm">
-        <label>Name:</label>
-        <div><input type="text" name="name"></div>
-        <br>
-        <label>Problem:</label>
-        <div><textarea name="comment"></textarea></div>
-        <p><button type="button" onclick="postComment()">Post</button></p>
-    </form>    
-    <div id="result">
-        <p>  Drop Your Problem In This Box </p>
-    </div>    
+
+    <script>
+        function postComment() {
+            var request = new XMLHttpRequest();
+            request.open("POST", "confirmation.php");
+            request.onreadystatechange = function() {
+                if (this.readyState === 4 && this.status === 200) {
+                    document.getElementById("result").innerHTML = this.responseText;
+                }
+            };
+            var myForm = document.getElementById("myForm");
+            var formData = new FormData(myForm);
+            request.send(formData);
+        }
+
+        function clickCounter() {
+            if (typeof(Storage) !== "undefined") {
+                if (sessionStorage.clickcount) {
+                    sessionStorage.clickcount = Number(sessionStorage.clickcount) + 1;
+                } else {
+                    sessionStorage.clickcount = 1;
+                }
+                document.getElementById("result").innerHTML = "You have submitted the problem " + sessionStorage.clickcount + " time(s) in this session.";
+            } else {
+                document.getElementById("result").innerHTML = "Sorry, your browser does not support web storage...";
+            }
+        }
+    </script>
+
+    <main class="complaint-page">
+        <div class="glass-strong complaint-card">
+            <div class="complaint-header">
+                <div class="complaint-icon">
+                    <i class="fas fa-exclamation-triangle"></i>
+                </div>
+                <h1>Complaint Box</h1>
+                <p>Describe your issue below and we will address it promptly.</p>
+            </div>
+
+            <form id="myForm" class="fms-form">
+                <div class="fms-form-group">
+                    <label class="fms-label"><i class="fas fa-user"></i> Your Name</label>
+                    <input type="text" name="name" class="fms-input" placeholder="Enter your name">
+                </div>
+                <div class="fms-form-group">
+                    <label class="fms-label"><i class="fas fa-comment-dots"></i> Problem Description</label>
+                    <textarea name="comment" class="fms-textarea" placeholder="Describe your problem in detail..."></textarea>
+                </div>
+                <button type="button" onclick="postCounterAndComment()" class="fms-btn fms-btn-primary fms-btn-lg" style="width: 100%;">
+                    <i class="fas fa-paper-plane"></i> Submit Problem
+                </button>
+            </form>
+
+            <div class="complaint-result" id="result">
+                <p><i class="fas fa-inbox" style="margin-right: var(--space-2); color: var(--purple-400);"></i> Drop your problem in this box and we will get back to you.</p>
+            </div>
+
+            <div class="complaint-actions">
+                <button type="button" onclick="clickCounter()" class="fms-btn fms-btn-secondary">
+                    <i class="fas fa-chart-bar"></i> Check Submissions
+                </button>
+                <a href="index.html" class="fms-btn fms-btn-ghost">
+                    <i class="fas fa-arrow-left"></i> Back to Home
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        function postCounterAndComment() {
+            postComment();
+            clickCounter();
+        }
+    </script>
 </body>
 </html>
-
-<!DOCTYPE html>
-<html>
-<head>
-<script>
-function clickCounter() {
-  if(typeof(Storage) !== "undefined") {
-    if (sessionStorage.clickcount) {
-      sessionStorage.clickcount = Number(sessionStorage.clickcount)+1;
-    } else {
-      sessionStorage.clickcount = 1;
-    }
-    document.getElementById("result").innerHTML = "You have submit the problem  " + sessionStorage.clickcount + " time(s) in this session.";
-  } else {
-    document.getElementById("result").innerHTML = "Sorry, your browser does not support web storage...";
-  }
-}
-</script>
-
-<style>
-
-html,body{
-  display: grid;
-  height: 100%;
-  width: 100%;
-  place-items: center;
-  text-align: center;
-background-image: url('asset/COMPLAINTBOX.jpg');
-
-}
-
-
-</style>
-</head>
-<body>
-<p><button onclick="clickCounter()" type="button">Click After submit</button></p>
-<div id="result"></div>
-
-</body>
-</html>
-
-
-

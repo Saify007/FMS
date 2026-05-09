@@ -1,121 +1,265 @@
-<!--TRANSATION  PART START-->
+<?php
+$nameErr = $emailErr = $mobilenoErr = $genderErr = $websiteErr = $agreeErr = "";
+$name = $email = $mobileno = $gender = $website = $agree = "";
 
-<!DOCTYPE HTML>  
-<html>
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    if (empty($_POST["name"])) {
+         $nameErr = "Name is required";
+    } else {
+        $name = input_data($_POST["name"]);
+        if (!preg_match("/^[a-zA-Z ]*$/", $name)) {
+            $nameErr = "Only alphabets and white space are allowed";
+        }
+    }
+    if (empty($_POST["email"])) {
+        $emailErr = "Email is required";
+    } else {
+        $email = input_data($_POST["email"]);
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            $emailErr = "Invalid email format";
+        }
+    }
+    if (empty($_POST["mobileno"])) {
+        $mobilenoErr = "Mobile no is required";
+    } else {
+        $mobileno = input_data($_POST["mobileno"]);
+        if (!preg_match("/^[0-9]*$/", $mobileno)) {
+            $mobilenoErr = "Only numeric value is allowed.";
+        }
+        if (strlen($mobileno) != 10) {
+            $mobilenoErr = "Mobile no must contain 10 digits.";
+        }
+    }
+    if (empty($_POST["website"])) {
+        $website = "";
+    } else {
+        $website = input_data($_POST["website"]);
+        if (!preg_match("/\b(?:(?:https?|ftp):\/\/|www\.)[-a-z0-9+&@#\/%?=~_|!:,.;]*[-a-z0-9+&@#\/%=~_|]/i", $website)) {
+            $websiteErr = "Invalid URL";
+        }
+    }
+    if (empty($_POST["gender"])) {
+        $genderErr = "Gender is required";
+    } else {
+        $gender = input_data($_POST["gender"]);
+    }
+    if (!isset($_POST['agree'])){
+        $agreeErr = "Accept terms of services before submit.";
+    } else {
+        $agree = input_data($_POST["agree"]);
+    }
+}
+
+function input_data($data) {
+    $data = trim($data);
+    $data = stripslashes($data);
+    $data = htmlspecialchars($data);
+    return $data;
+}
+?>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instructions | Forseti</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="css/design-system.css">
+    <style>
+        .instr-page {
+            min-height: 100vh;
+            padding: calc(var(--header-height) + var(--space-12)) var(--space-4) var(--space-12);
+        }
+        .instr-card {
+            max-width: 720px;
+            margin: 0 auto;
+            padding: var(--space-10);
+            animation: scaleIn 0.5s ease-out;
+        }
+        .instr-header {
+            text-align: center;
+            margin-bottom: var(--space-8);
+        }
+        .instr-header .instr-icon {
+            width: 72px;
+            height: 72px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, var(--purple-500) 0%, var(--purple-600) 100%);
+            color: var(--white);
+            border-radius: var(--radius-lg);
+            font-size: var(--text-3xl);
+            margin: 0 auto var(--space-4);
+            box-shadow: var(--shadow-purple);
+        }
+        .instr-header h1 {
+            font-size: var(--text-2xl);
+            color: var(--purple-900);
+            margin-bottom: var(--space-2);
+        }
+        .instr-header p {
+            color: var(--slate-500);
+        }
+        .instr-steps {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-4);
+            margin-bottom: var(--space-8);
+        }
+        .instr-step {
+            display: flex;
+            align-items: flex-start;
+            gap: var(--space-4);
+            padding: var(--space-4);
+            background: var(--purple-50);
+            border-radius: var(--radius-md);
+            border-left: 4px solid var(--purple-500);
+        }
+        .instr-step-num {
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--purple-600);
+            color: var(--white);
+            border-radius: 50%;
+            font-family: var(--font-heading);
+            font-weight: 700;
+            font-size: var(--text-sm);
+            flex-shrink: 0;
+        }
+        .instr-step p {
+            color: var(--slate-700);
+            font-size: var(--text-sm);
+            line-height: var(--line-relaxed);
+            margin: 0;
+        }
+        .instr-form {
+            margin-top: var(--space-8);
+            padding-top: var(--space-8);
+            border-top: 1px solid var(--slate-200);
+        }
+        .instr-form h2 {
+            font-size: var(--text-xl);
+            color: var(--purple-800);
+            margin-bottom: var(--space-6);
+            text-align: center;
+        }
+        .result-box {
+            margin-top: var(--space-6);
+            padding: var(--space-4);
+            background: var(--purple-50);
+            border-radius: var(--radius-md);
+            border-left: 4px solid var(--purple-500);
+        }
+        .result-box h3 {
+            font-size: var(--text-base);
+            color: var(--purple-800);
+            margin-bottom: var(--space-2);
+        }
+        .result-box p {
+            font-size: var(--text-sm);
+            color: var(--slate-600);
+            margin-bottom: var(--space-1);
+        }
+        @media (max-width: 480px) {
+            .instr-card {
+                padding: var(--space-6);
+            }
+        }
+    </style>
 </head>
-<body>  
-  
-<h1> Welcome To Forseti Management System </h1>
-<h2> Instructions :</h2>
-<h3> 1. Please Provide Your Details Information Here </h3><br>
-<h3> 2. After That Click On Done Button </h3>
+<body class="fms-page">
 
-<?php  
-// define variables to empty values  
-$nameErr = $emailErr = $mobilenoErr = $genderErr = $websiteErr = $agreeErr = "";  
-$name = $email = $mobileno = $gender = $website = $agree = "";  
-  
-//Input fields validation  
-if ($_SERVER["REQUEST_METHOD"] == "POST") {  
-      
-//String Validation  
-    if (emptyempty($_POST["name"])) {  
-         $nameErr = "Name is required";  
-    } else {  
-        $name = input_data($_POST["name"]);  
-            // check if name only contains letters and whitespace  
-            if (!preg_match("/^[a-zA-Z ]*$/",$name)) {  
-                $nameErr = "Only alphabets and white space are allowed";  
-            }  
-    }  
-      
-    //Email Validation   
-    if (emptyempty($_POST["email"])) {  
-            $emailErr = "Email is required";  
-    } else {  
-            $email = input_data($_POST["email"]);  
-            // check that the e-mail address is well-formed  
-            if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {  
-                $emailErr = "Invalid email format";  
-            }  
-     }  
-    
-    //Number Validation  
-    if (emptyempty($_POST["mobileno"])) {  
-            $mobilenoErr = "Mobile no is required";  
-    } else {  
-            $mobileno = input_data($_POST["mobileno"]);  
-            // check if mobile no is well-formed  
-            if (!preg_match ("/^[0-9]*$/", $mobileno) ) {  
-            $mobilenoErr = "Only numeric value is allowed.";  
-            }  
-        //check mobile no length should not be less and greator than 10  
-        if (strlen ($mobileno) != 10) {  
-            $mobilenoErr = "Mobile no must contain 10 digits.";  
-            }  
-    }  
-      
-    //URL Validation      
-    if (emptyempty($_POST["website"])) {  
-        $website = "";  
-    } else {  
-            $website = input_data($_POST["website"]);  
-            // check if URL address syntax is valid  
-            if (!preg_match("/\b(?:(?:https?|ftp):\/\/|www\.)[-a-z0-9+&@#\/%?=~_|!:,.;]*[-a-z0-9+&@#\/%=~_|]/i",$website)) {  
-                $websiteErr = "Invalid URL";  
-            }      
-    }  
-      
-    //Empty Field Validation  
-    if (emptyempty ($_POST["gender"])) {  
-            $genderErr = "Gender is required";  
-    } else {  
-            $gender = input_data($_POST["gender"]);  
-    }  
-  
-    //Checkbox Validation  
-    if (!isset($_POST['agree'])){  
-            $agreeErr = "Accept terms of services before submit.";  
-    } else {  
-            $agree = input_data($_POST["agree"]);  
-    }  
-}  
-function input_data($data) {  
-  $data = trim($data);  
-  $data = stripslashes($data);  
-  $data = htmlspecialchars($data);  
-  return $data;  
-}  
-?>  
-  
+    <nav class="fms-nav scrolled">
+        <div class="fms-nav-inner">
+            <a href="index.html" class="fms-logo">
+                <i class="fas fa-balance-scale" style="font-size: 1.5rem; color: var(--purple-600);"></i>
+                Forseti
+            </a>
+        </div>
+    </nav>
 
+    <main class="instr-page">
+        <div class="fms-container">
+            <div class="glass instr-card">
+                <div class="instr-header">
+                    <div class="instr-icon">
+                        <i class="fas fa-info-circle"></i>
+                    </div>
+                    <h1>Welcome to Forseti Management System</h1>
+                    <p>Please follow the instructions below to complete your registration.</p>
+                </div>
 
+                <div class="instr-steps">
+                    <div class="instr-step">
+                        <div class="instr-step-num">1</div>
+                        <p>Provide your details information in the form below accurately.</p>
+                    </div>
+                    <div class="instr-step">
+                        <div class="instr-step-num">2</div>
+                        <p>After filling in all required fields, click the Submit button to proceed.</p>
+                    </div>
+                </div>
 
-<form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">  
-  Name: <input type="text" name="name">
-  <br><br>
-  E-mail: <input type="text" name="email">
-  <br><br>
-  DOB: <input type="text" name="dob">
-  <br>
-  Age: <input type="text" name="age">
-  <br>
-  Gender:
-  <input type="radio" name="gender" value="female">Female
-  <input type="radio" name="gender" value="male">Male
-  <input type="radio" name="gender" value="other">Other
-  <br>
-  <input type="submit" name="submit" value="Submit">
-  <br>
-  
-</form>
+                <div class="instr-form">
+                    <h2>Registration Form</h2>
+                    <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" class="fms-form">
+                        <div class="fms-form-group">
+                            <label class="fms-label"><i class="fas fa-user"></i> Name</label>
+                            <input type="text" name="name" class="fms-input" value="<?php echo $name; ?>">
+                            <?php if($nameErr): ?><span class="fms-error"><?php echo $nameErr; ?></span><?php endif; ?>
+                        </div>
+                        <div class="fms-form-group">
+                            <label class="fms-label"><i class="fas fa-envelope"></i> Email</label>
+                            <input type="text" name="email" class="fms-input" value="<?php echo $email; ?>">
+                            <?php if($emailErr): ?><span class="fms-error"><?php echo $emailErr; ?></span><?php endif; ?>
+                        </div>
+                        <div class="fms-form-group">
+                            <label class="fms-label"><i class="fas fa-calendar"></i> Date of Birth</label>
+                            <input type="text" name="dob" class="fms-input" placeholder="DD/MM/YYYY">
+                        </div>
+                        <div class="fms-form-group">
+                            <label class="fms-label"><i class="fas fa-hourglass-half"></i> Age</label>
+                            <input type="text" name="age" class="fms-input" placeholder="Your age">
+                        </div>
+                        <div class="fms-form-group">
+                            <label class="fms-label"><i class="fas fa-venus-mars"></i> Gender</label>
+                            <div class="fms-radio-group">
+                                <label class="fms-radio"><input type="radio" name="gender" value="female" <?php if($gender == 'female') echo 'checked'; ?>> Female</label>
+                                <label class="fms-radio"><input type="radio" name="gender" value="male" <?php if($gender == 'male') echo 'checked'; ?>> Male</label>
+                                <label class="fms-radio"><input type="radio" name="gender" value="other" <?php if($gender == 'other') echo 'checked'; ?>> Other</label>
+                            </div>
+                        </div>
+                        <button type="submit" name="submit" class="fms-btn fms-btn-primary fms-btn-lg" style="width: 100%;">
+                            <i class="fas fa-paper-plane"></i> Submit
+                        </button>
+                    </form>
 
-<br> <br>
+                    <?php if(isset($_POST['submit']) && empty($nameErr) && empty($emailErr) && empty($genderErr)): ?>
+                    <div class="result-box">
+                        <h3><i class="fas fa-check-circle" style="color: var(--success);"></i> Submitted Successfully!</h3>
+                        <p><strong>Name:</strong> <?php echo $name; ?></p>
+                        <p><strong>Email:</strong> <?php echo $email; ?></p>
+                        <p><strong>Gender:</strong> <?php echo ucfirst($gender); ?></p>
+                    </div>
+                    <?php endif; ?>
+                </div>
 
-<a href="lawyerfb.html"> Done</a>
+                <div style="text-align: center; margin-top: var(--space-8);">
+                    <a href="lawyerfb.html" class="fms-btn fms-btn-primary fms-btn-lg">
+                        <i class="fas fa-arrow-right"></i> Done
+                    </a>
+                </div>
+            </div>
+        </div>
+    </main>
 
+    <script src="js/main.js"></script>
 </body>
 </html>

@@ -1,104 +1,260 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-
-    <title>Lawyer Rating And Feedback Form | FMS</title>
-
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rate Your Lawyer | Forseti</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="css/design-system.css">
     <style>
-      body {
-        background-color: black;
-        font-family: cursive;
-      }
-      
-      .glow {
-        font-size: 80px;
-        color: #fff;
-        text-align: center;
-        animation: glow 1s ease-in-out infinite alternate;
-      }
-      .gloww {
-        font-size: 35px;
-        color: #fff;
-        text-align: center;
-        animation: glow 1s ease-in-out infinite alternate;
-      }
-      @-webkit-keyframes glow{
-        from {
-          text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #2300e6, 0 0 40px #6400e6, 0 0 50px #2300e6, 0 0 60px #5100e6, 0 0 70px #3200e6;
+        .rate-page {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: calc(var(--header-height) + var(--space-8)) var(--space-4) var(--space-8);
+            background: linear-gradient(135deg, var(--purple-700) 0%, var(--purple-800) 50%, var(--purple-900) 100%);
+            position: relative;
+            overflow: hidden;
         }
-        
-        to {
-          text-shadow: 0 0 20px #fff, 0 0 30px #ff4da6, 0 0 40px #ff4da6, 0 0 50px #ff4da6, 0 0 60px #ff4da6, 0 0 70px #ff4da6, 0 0 80px #ff4da6;
+        .rate-page::before {
+            content: '';
+            position: absolute;
+            top: -10%;
+            right: -10%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(167, 139, 250, 0.2) 0%, transparent 70%);
+            border-radius: 50%;
         }
-      }
-      
-      @-webkit-keyframes gloww{
-        from {
-          text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #2300e6, 0 0 40px #6400e6, 0 0 50px #2300e6, 0 0 60px #5100e6, 0 0 70px #3200e6;
+        .rate-card {
+            width: 100%;
+            max-width: 480px;
+            padding: var(--space-10);
+            animation: scaleIn 0.5s ease-out;
+            position: relative;
+            z-index: 1;
+            text-align: center;
         }
-        
-        to {
-          text-shadow: 0 0 20px #fff, 0 0 30px #ff4da6, 0 0 40px #ff4da6, 0 0 50px #ff4da6, 0 0 60px #ff4da6, 0 0 70px #ff4da6, 0 0 80px #ff4da6;
+        .rate-header {
+            margin-bottom: var(--space-8);
         }
-      }
-      </style>
-      </head>
-      <body>
-      
-      <h1 class="glow">Lawyer's Reviews</h1>
+        .rate-header .rate-icon {
+            width: 72px;
+            height: 72px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, var(--gold) 0%, #f59e0b 100%);
+            color: var(--white);
+            border-radius: var(--radius-lg);
+            font-size: var(--text-3xl);
+            margin: 0 auto var(--space-4);
+            box-shadow: 0 8px 24px rgba(251, 191, 36, 0.3);
+        }
+        .rate-header h1 {
+            font-size: var(--text-2xl);
+            color: var(--purple-900);
+            margin-bottom: var(--space-2);
+        }
+        .rate-header p {
+            font-size: var(--text-sm);
+            color: var(--slate-500);
+        }
+        .star-widget {
+            display: flex;
+            flex-direction: row-reverse;
+            justify-content: center;
+            gap: var(--space-2);
+            margin-bottom: var(--space-6);
+        }
+        .star-widget input {
+            display: none;
+        }
+        .star-widget label {
+            font-size: var(--text-4xl);
+            color: var(--slate-300);
+            cursor: pointer;
+            transition: all var(--transition-fast);
+            line-height: 1;
+        }
+        .star-widget label:hover,
+        .star-widget label:hover ~ label,
+        .star-widget input:checked ~ label {
+            color: var(--gold);
+            text-shadow: 0 0 10px rgba(251, 191, 36, 0.5);
+            transform: scale(1.1);
+        }
+        .rate-form {
+            display: none;
+        }
+        .rate-form.show {
+            display: block;
+            animation: fadeInUp 0.3s ease-out;
+        }
+        .rate-header-text {
+            font-family: var(--font-heading);
+            font-size: var(--text-xl);
+            font-weight: 600;
+            color: var(--purple-800);
+            min-height: 36px;
+            margin-bottom: var(--space-4);
+        }
+        .rate-textarea textarea {
+            width: 100%;
+            min-height: 120px;
+            padding: var(--space-4);
+            border: 2px solid var(--slate-200);
+            border-radius: var(--radius-md);
+            font-family: var(--font-body);
+            font-size: var(--text-base);
+            color: var(--slate-800);
+            resize: vertical;
+            outline: none;
+            transition: all var(--transition-base);
+        }
+        .rate-textarea textarea:focus {
+            border-color: var(--purple-500);
+            box-shadow: 0 0 0 4px rgba(124, 58, 237, 0.1);
+        }
+        .rate-submit {
+            margin-top: var(--space-4);
+        }
+        .rate-submit .fms-btn {
+            width: 100%;
+        }
+        .rate-post {
+            display: none;
+            padding: var(--space-8);
+            text-align: center;
+        }
+        .rate-post.show {
+            display: block;
+            animation: scaleIn 0.4s ease-out;
+        }
+        .rate-post-icon {
+            width: 80px;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, var(--success) 0%, #059669 100%);
+            color: var(--white);
+            border-radius: 50%;
+            font-size: var(--text-3xl);
+            margin: 0 auto var(--space-4);
+            box-shadow: 0 8px 24px rgba(16, 185, 129, 0.3);
+        }
+        .rate-post h2 {
+            font-size: var(--text-xl);
+            color: var(--purple-900);
+            margin-bottom: var(--space-2);
+        }
+        .rate-post p {
+            color: var(--slate-500);
+            margin-bottom: var(--space-6);
+        }
+        .rate-actions {
+            display: flex;
+            gap: var(--space-3);
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        @media (max-width: 480px) {
+            .rate-card {
+                padding: var(--space-6);
+            }
+        }
+    </style>
+</head>
+<body>
 
-      <h3 class="gloww">Rates Your Lawyer Out Of 5 Stars:</h3>
+    <main class="rate-page">
+        <div class="glass-strong rate-card">
+            <div class="rate-post" id="post">
+                <div class="rate-post-icon">
+                    <i class="fas fa-check"></i>
+                </div>
+                <h2>Thank You!</h2>
+                <p>We are grateful for sharing your feedback and rating with us!</p>
+                <div class="rate-actions">
+                    <button type="button" class="fms-btn fms-btn-secondary" onclick="editRating()">
+                        <i class="fas fa-edit"></i> Modify
+                    </button>
+                    <a href="checkout.html" class="fms-btn fms-btn-primary">
+                        <i class="fas fa-arrow-right"></i> Continue
+                    </a>
+                </div>
+            </div>
 
-    <link rel="stylesheet" href="ratestar.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
-  </head>
-  <body>
-    <div class="container">
-      <div class="post">
-        <div class="text"> Gratefulness for sharing your feedback and rating with us!</div>
-        <div class="edit">MODIFY</div>
-      </div>
-      <div class="star-widget">
-        <input type="radio" name="rate" id="rate-5">
-        <label for="rate-5" class="fas fa-star"></label>
-        <input type="radio" name="rate" id="rate-4">
-        <label for="rate-4" class="fas fa-star"></label>
-        <input type="radio" name="rate" id="rate-3">
-        <label for="rate-3" class="fas fa-star"></label>
-        <input type="radio" name="rate" id="rate-2">
-        <label for="rate-2" class="fas fa-star"></label>
-        <input type="radio" name="rate" id="rate-1">
-        <label for="rate-1" class="fas fa-star"></label>
-        <form action="#">
-          <header></header>
-          <div class="textarea">
-            <textarea cols="30" placeholder="Describe your experience.."></textarea>
-          </div>
-          <div class="btn">
-            <button type="submit">Commit</button>
-          </div>
-        </form>
-      </div>
-    </div>
+            <div id="widget">
+                <div class="rate-header">
+                    <div class="rate-icon">
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <h1>Lawyer's Reviews</h1>
+                    <p>Rate your lawyer out of 5 stars</p>
+                </div>
+
+                <div class="star-widget">
+                    <input type="radio" name="rate" id="rate-5">
+                    <label for="rate-5" class="fas fa-star"></label>
+                    <input type="radio" name="rate" id="rate-4">
+                    <label for="rate-4" class="fas fa-star"></label>
+                    <input type="radio" name="rate" id="rate-3">
+                    <label for="rate-3" class="fas fa-star"></label>
+                    <input type="radio" name="rate" id="rate-2">
+                    <label for="rate-2" class="fas fa-star"></label>
+                    <input type="radio" name="rate" id="rate-1">
+                    <label for="rate-1" class="fas fa-star"></label>
+                </div>
+
+                <div class="rate-form" id="rateForm">
+                    <div class="rate-header-text" id="rateHeader">Select a rating</div>
+                    <div class="rate-textarea">
+                        <textarea id="rateComment" placeholder="Describe your experience..."></textarea>
+                    </div>
+                    <div class="rate-submit">
+                        <button type="button" class="fms-btn fms-btn-primary fms-btn-lg" onclick="submitRating()">
+                            <i class="fas fa-paper-plane"></i> Submit Review
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
     <script>
-      const btn = document.querySelector("button");
-      const post = document.querySelector(".post");
-      const widget = document.querySelector(".star-widget");
-      const editBtn = document.querySelector(".edit");
-      btn.onclick = ()=>{
-        widget.style.display = "none";
-        post.style.display = "block";
-        editBtn.onclick = ()=>{
-          widget.style.display = "block";
-          post.style.display = "none";
+        const headers = {
+            'rate-1': 'Extremely Poor',
+            'rate-2': 'Poor',
+            'rate-3': 'Good Enough',
+            'rate-4': 'Excellent',
+            'rate-5': 'Marvelous'
+        };
+
+        document.querySelectorAll('.star-widget input').forEach(input => {
+            input.addEventListener('change', function() {
+                const form = document.getElementById('rateForm');
+                const header = document.getElementById('rateHeader');
+                form.classList.add('show');
+                header.textContent = headers[this.id] || 'Select a rating';
+            });
+        });
+
+        function submitRating() {
+            document.getElementById('widget').style.display = 'none';
+            document.getElementById('post').classList.add('show');
         }
-        return false;
-      }
+
+        function editRating() {
+            document.getElementById('post').classList.remove('show');
+            document.getElementById('widget').style.display = 'block';
+        }
     </script>
-
-
-<a href="checkout.html"> Submit</a> 
-
-  </body>
+    <script src="js/main.js"></script>
+</body>
 </html>

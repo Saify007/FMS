@@ -1,457 +1,347 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" >
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" >
-  <title>Forsit Management System</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Forseti Management System</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <link rel="stylesheet" href="css/design-system.css">
   <style>
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, var(--purple-700) 0%, var(--purple-800) 40%, var(--purple-900) 100%);
+      z-index: 0;
+    }
 
+    .hero-bg::before {
+      content: '';
+      position: absolute;
+      top: 10%;
+      left: -5%;
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(167, 139, 250, 0.25) 0%, transparent 70%);
+      border-radius: 50%;
+      animation: float 6s ease-in-out infinite;
+    }
 
-body{
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: 'Georama', sans-serif;
-  background-color: white;
-  text-align:center;
-  text-size-adjust: 5px;
-}
+    .hero-bg::after {
+      content: '';
+      position: absolute;
+      bottom: 10%;
+      right: -5%;
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, rgba(139, 92, 246, 0.2) 0%, transparent 70%);
+      border-radius: 50%;
+      animation: float 8s ease-in-out infinite reverse;
+    }
 
-ul{
-  list-style: none;
-}
-input,button,textarea{
-  border: none;
-  outline: none;
-}
-nav{
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  left: 0;
-  top: 0;
-  width: 100%;
-  z-index: 1;
-}
-nav ul{
-  display: flex;
-}
-nav ul li a{
-  height: 43px;
-  line-height: 43px;
-  margin: 3px;
-  padding: 0 22px;
-  display: flex;
-  font-size: 1rem;
-  font-weight: 500;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  border-radius: 3px;
-  transition-timing-function: 0.6s ease-in-out;
-  color: #000000;
-}
-nav ui li a: hover{
-  background-color: #fc6f41;
-  box-shadow: 5px 10px 30px rgba(252, 59, 0, 0.397);
-}
+    .hero-logo {
+      width: 180px;
+      height: auto;
+      margin-bottom: var(--space-6);
+      filter: drop-shadow(0 8px 24px rgba(0,0,0,0.2));
+      animation: scaleIn 0.8s ease-out;
+    }
 
+    .hero-title {
+      font-family: var(--font-display);
+      font-size: clamp(2.5rem, 6vw, 4rem);
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1.1;
+      margin-bottom: var(--space-4);
+      text-shadow: 0 2px 20px rgba(0,0,0,0.15);
+    }
 
-b{
-  margin: 50px auto 0 auto;
-  font-family: 'Dancing Script', cursive;
-  font-size: 35px;
+    .hero-subtitle {
+      font-size: var(--text-xl);
+      color: var(--purple-200);
+      max-width: 600px;
+      margin: 0 auto var(--space-8);
+      line-height: var(--line-relaxed);
+    }
 
-}
+    .hero-actions {
+      display: flex;
+      gap: var(--space-4);
+      justify-content: center;
+      flex-wrap: wrap;
+    }
 
-h2{
- font-family: 'Merriweather', cursive;
- font-size: 2rem;
- font-weight:lighter;
- 
-}
-h3{
- font-family: 'Merriweather', serif;
-}
-.header-skill{
-  text-align: left;
-}
-p{
-  margin-bottom: 0;
-}
-span{
-  text-decoration: underline;
-}
+    .hero-stats {
+      display: flex;
+      justify-content: center;
+      gap: var(--space-12);
+      margin-top: var(--space-12);
+      flex-wrap: wrap;
+    }
 
-.top-container{
-  background-image: linear-gradient(to right top, #d16ba5, #c777b9, #ba83ca, #aa8fd8, #9a9ae1, #8aa7ec, #79b3f4, #69bff8, #52cffe, #41dfff, #46eefa, #5ffbf1);
-  position: relative;
-  padding-top: 100px;
-}
-.bottom-container{
+    .hero-stat {
+      text-align: center;
+    }
 
-  margin-top: 20px;
-  background-image: linear-gradient(to right top, #d16ba5, #c777b9, #ba83ca, #aa8fd8, #9a9ae1, #8aa7ec, #79b3f4, #69bff8, #52cffe, #41dfff, #46eefa, #5ffbf1);
-  padding: 50px 0 20px;
-  font-size: 35px;
-  /* color: #000000; */
-}
+    .hero-stat-value {
+      font-family: var(--font-heading);
+      font-size: var(--text-3xl);
+      font-weight: 700;
+      color: var(--white);
+    }
 
+    .hero-stat-label {
+      font-size: var(--text-sm);
+      color: var(--purple-300);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
 
-.top-cloud{
-  position: left;
-  right: 400px;
-  top: 50px;
-}
-.bottom-cloud{
-  position: left;
-  left: 400px;
-  bottom: 300px;
-}
-.intro{
-  width:10%;
-  margin: auto auto 50px auto;
-}
-.skill-desc{
-  text-align: left;
-}
-.skill-row{
-  width:50%;
-  margin:100px auto 150px auto;
-}
-.skill1{
-  width:25%;
-  float: left;
-  margin-right: 10px;
-}
-.skill2{
-  width:25%;
-  float: right;
-  margin-left: 10px;
-}
-hr{
-  border-style: dotted none none none;
-  border-width: 5px;
-  width:5%;
-}
-.btn {
-  background: #3498db;
-  background-image: -webkit-linear-gradient(top, #3498db, #2980b9);
-  background-image: -moz-linear-gradient(top, #3498db, #2980b9);
-  background-image: -ms-linear-gradient(top, #3498db, #2980b9);
-  background-image: -o-linear-gradient(top, #3498db, #2980b9);
-  background-image: linear-gradient(to bottom, #3498db, #2980b9);
-  -webkit-border-radius: 28;
-  -moz-border-radius: 28;
-  border-radius: 28px;
-  font-family: Arial;
-  color: #ffffff;
-  font-size: 20px;
-  padding: 10px 20px 10px 20px;
-  text-decoration: none;
-}
+    .reg-section {
+      padding: var(--space-24) 0;
+      position: relative;
+    }
 
-.btn:hover {
-  background: #3cb0fd;
-  background-image: -webkit-linear-gradient(top, #3cb0fd, #3498db);
-  background-image: -moz-linear-gradient(top, #3cb0fd, #3498db);
-  background-image: -ms-linear-gradient(top, #3cb0fd, #3498db);
-  background-image: -o-linear-gradient(top, #3cb0fd, #3498db);
-  background-image: linear-gradient(to bottom, #3cb0fd, #3498db);
-  text-decoration: none;
-}
-.contact-msg{
-  width:40%;
-  margin:40px auto 60px;
-  background-color: #fc6f41;
-  color: #fff;
-  box-shadow: 5px 10px 30px rgba(252, 59, 0, 0.397);
-  
-}
+    .reg-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--space-8);
+      max-width: 900px;
+      margin: 0 auto;
+    }
 
+    .reg-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding: var(--space-10);
+      gap: var(--space-4);
+    }
 
-a{
-  transition: transform 0.5s;
-  color: #fff;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    .reg-card-img {
+      width: 120px;
+      height: 120px;
+      object-fit: contain;
+      border-radius: var(--radius-lg);
+      padding: var(--space-4);
+      background: linear-gradient(135deg, var(--purple-100) 0%, var(--purple-200) 100%);
+      transition: transform var(--transition-bounce), box-shadow var(--transition-base);
+    }
 
-}
-a:hover{
-  
-  background-color: #fc6f41;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  transform: scale(2.1);
-  cursor: pointer;
-}
-.copyright{
-  color: #EAF6F6;
-  box-shadow: 31px 36px 15px 0px rgba(0,0,0,0.1);
+    .reg-card:hover .reg-card-img {
+      transform: scale(1.08) rotate(-3deg);
+      box-shadow: var(--shadow-purple);
+    }
 
-}
+    .reg-card h3 {
+      font-size: var(--text-xl);
+      color: var(--purple-900);
+    }
 
+    .reg-card p {
+      color: var(--slate-500);
+      line-height: var(--line-relaxed);
+      font-size: var(--text-sm);
+    }
 
+    .contact-section {
+      padding: var(--space-24) 0;
+      text-align: center;
+    }
 
+    .contact-glass {
+      max-width: 700px;
+      margin: 0 auto;
+      padding: var(--space-12);
+    }
 
+    .contact-glass h2 {
+      margin-bottom: var(--space-4);
+    }
 
-    @import url('https://fonts.googleapis.com/css2?family=Lobster+Two:ital@1&family=Orbitron:wght@400;800&display=swap');
+    .contact-glass p {
+      margin-bottom: var(--space-8);
+      color: var(--slate-500);
+    }
 
+    @media (max-width: 768px) {
+      .reg-grid {
+        grid-template-columns: 1fr;
+        gap: var(--space-6);
+      }
 
+      .hero-stats {
+        gap: var(--space-6);
+      }
 
-
-    
-body{
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  text-align:center;
-  text-size-adjust: 5px;
-  font-family: 'Orbitron', sans-serif;
-  background-image: linear-gradient(to right top, #d16ba5, #c777b9, #ba83ca, #aa8fd8, #9a9ae1, #8aa7ec, #79b3f4, #69bff8, #52cffe, #41dfff, #46eefa, #5ffbf1);
-
-}
-
-  h1{
-
-    font-family: 'Orbitron', sans-serif;
-   
-  }
-
-  h2{
-
-    font-family: 'Orbitron', sans-serif;
-  }
-    
-ul{
-  list-style: none;
-}
-input,button,textarea{
-  border: none;
-  outline: none;
-}
-nav{
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  left: 0;
-  top: 0;
-  width: 100%;
-  z-index: 1;
-}
-nav ul{
-  display: flex;
-}
-nav ul li a{
-  height: 43px;
-  line-height: 43px;
-  margin: 3px;
-  padding: 0 22px;
-  display: flex;
-  font-size: 1rem;
-  font-weight: 500;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  border-radius: 3px;
-  transition-timing-function: 0.6s ease-in-out;
-  color: #000000;
-}
-nav ui li a: hover{
-  background-color: #fc6f41;
-  box-shadow: 5px 10px 30px rgba(252, 59, 0, 0.397);
-}
-
-.lokos{
-  border-radius: 50%;
-  size: 30cm;
-  /* box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); */
-  padding: 10px;
-}
-b{
-  margin: 50px auto 0 auto;
-  font-family: 'Orbitron', sans-serif;
-  font-size: 35px;
-
-}
-
-h2{
-font-family: 'Orbitron', sans-serif;
- font-size: 2rem;
- font-weight:lighter;
- 
-}
-h3{
-  font-family: 'Orbitron', sans-serif;
-}
-.header-skill{
-  text-align: left;
-}
-p{
-  margin-bottom: 0;
-}
-span{
-  text-decoration: underline;
-}
-
-.top-container{
-  /* background-image: linear-gradient(to right top, #d16ba5, #c777b9, #ba83ca, #aa8fd8, #9a9ae1, #8aa7ec, #79b3f4, #69bff8, #52cffe, #41dfff, #46eefa, #5ffbf1); */
-  position: relative;
-  padding-top: 100px;
-}
-.bottom-container{
-  margin-top: 20px;
-  /* background-image: linear-gradient(to right top, #d16ba5, #c777b9, #ba83ca, #aa8fd8, #9a9ae1, #8aa7ec, #79b3f4, #69bff8, #52cffe, #41dfff, #46eefa, #5ffbf1); */
-  padding: 50px 0 20px;
-}
-.top-cloud{
-  position: left;
-  right: 400px;
-  top: 50px;
-}
-.bottom-cloud{
-  position: left;
-  left: 400px;
-  bottom: 300px;
-}
-.intro{
-  width:10%;
-  margin: auto auto 50px auto;
-  border-radius: 50%;
-}
-.skill-desc{
-  text-align: left;
-  border-radius: 50%;
-}
-.skill-row{
-  width:50%;
-  margin:100px auto 150px auto;
-  border-radius: 50%;
-}
-.skill1{
-  width:25%;
-  float: left;
-  margin-right: 10px;
-  border-radius: 50%;
-}
-.skill2{
-  width:25%;
-  float: right;
-  margin-left: 10px;
-  border-radius: 50%;
-}
-hr{
-  border-style: dotted none none none;
-  border-width: 5px;
-  width:5%;
-}
-.btn {
-  background: #3498db;
-  background-image: -webkit-linear-gradient(top, #3498db, #2980b9);
-  background-image: -moz-linear-gradient(top, #3498db, #2980b9);
-  background-image: -ms-linear-gradient(top, #3498db, #2980b9);
-  background-image: -o-linear-gradient(top, #3498db, #2980b9);
-  background-image: linear-gradient(to bottom, #3498db, #2980b9);
-  -webkit-border-radius: 28;
-  -moz-border-radius: 28;
-  border-radius: 28px;
-  font-family: 'Orbitron', sans-serif;
-  color: #ffffff;
-  font-size: 20px;
-  padding: 10px 20px 10px 20px;
-  text-decoration: none;
-}
-
-.btn:hover {
-  background: #3cb0fd;
-  background-image: -webkit-linear-gradient(top, #3cb0fd, #3498db);
-  background-image: -moz-linear-gradient(top, #3cb0fd, #3498db);
-  background-image: -ms-linear-gradient(top, #3cb0fd, #3498db);
-  background-image: -o-linear-gradient(top, #3cb0fd, #3498db);
-  background-image: linear-gradient(to bottom, #3cb0fd, #3498db);
-  text-decoration: none;
-}
-.contact-msg{
-  width:40%;
-  margin:40px auto 60px;
-  color: #fff;
-  font-size: 0.5cm;
-  
-}
-
-.copyright{
-  color: #EAF6F6;
-  padding: 20px 0;
-}
-
-
+      .hero-actions {
+        flex-direction: column;
+        align-items: center;
+      }
+    }
   </style>
 </head>
-<body>
- <div class="top-container">
-   <nav>
-     <ul class="menu">
-       <li><a href="index.php" class="active">Home</a></li>
-       <li><a href="adminLogin.php">Admin</a></li>
-       <li><a href="UserLogin.php">User LogIn</a></li>
-       <li><a href="lawyerLogin.php">Lawyer LogIn</a></li>
-     </ul>
-   </nav>
-   <img class="top-cloud" src="cloud.png" alt="cloud">
+<body class="fms-page">
 
+  <!-- Navigation -->
+  <nav class="fms-nav">
+    <div class="fms-nav-inner">
+      <a href="index.html" class="fms-logo">
+        <i class="fas fa-balance-scale" style="font-size: 1.5rem; color: var(--purple-600);"></i>
+        Forseti
+      </a>
+      <button class="fms-nav-toggle" aria-label="Toggle navigation">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <div class="fms-nav-links">
+        <a href="index.html" class="fms-nav-link active">Home</a>
+        <a href="application-form.html" class="fms-nav-link">Services</a>
+        <a href="contact.html" class="fms-nav-link">Contact</a>
+        <a href="user-login.html" class="fms-nav-link">User Login</a>
+        <a href="lawyer-login.html" class="fms-nav-link">Lawyer Login</a>
+        <a href="admin-login.html" class="fms-nav-link">Admin Login</a>
+        <a href="user-registration.html" class="fms-btn fms-btn-primary fms-nav-cta fms-btn-sm">Get Started</a>
+      </div>
+    </div>
+  </nav>
 
+  <!-- Hero Section -->
+  <section class="fms-hero" style="position: relative; overflow: hidden;">
+    <div class="hero-bg"></div>
+    <div class="fms-container" style="position: relative; z-index: 1;">
+      <div class="fms-hero-content animate-fade-in-up">
+        <img src="lawyerlogo.png" alt="Forseti Logo" class="hero-logo">
+        <h1 class="hero-title">Welcome to Forseti Management System</h1>
+        <p class="hero-subtitle">A simple, secure, and elegant platform for lawyers and clients to negotiate, communicate, and manage legal services with confidence.</p>
+        <div class="hero-actions">
+          <a href="lawyer-registration.html" class="fms-btn fms-btn-primary fms-btn-lg">
+            <i class="fas fa-user-tie"></i>
+            Register as Lawyer
+          </a>
+          <a href="user-registration.html" class="fms-btn fms-btn-secondary fms-btn-lg">
+            <i class="fas fa-user"></i>
+            Register as User
+          </a>
+        </div>
+        <div class="hero-stats">
+          <div class="hero-stat">
+            <div class="hero-stat-value">500+</div>
+            <div class="hero-stat-label">Verified Lawyers</div>
+          </div>
+          <div class="hero-stat">
+            <div class="hero-stat-value">10K+</div>
+            <div class="hero-stat-label">Happy Clients</div>
+          </div>
+          <div class="hero-stat">
+            <div class="hero-stat-value">99%</div>
+            <div class="hero-stat-label">Success Rate</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-  <b> <h1>Welcome TO Forseti Management System
-  </h1></b>
-  
-   <p>
-   <h2><span>A simple and secure platform for Lawyer And Client negotiation</span></h2>
-   </p>
-   <img class="bottom-cloud" src="cloud.png" alt="cloud">
-   <img src="lawyerlogo.png" alt="logo">
- </div>
- <div class="middle-container">
-   <div class="profile">
-     <img class="lokos" src="lawjustice.jpg" alt="">
-     <h2>Hello.</h2>
-     <p class="intro">Good Moring ! Sir </p>
-   </div>
-   <hr>
-   <div class="skills">
-     <h2>Registration Section</h2>
-     <div class="skill-row">
-       <img class="skill1" src="computer.png" alt="driving">
-       <h3 class="header-skill"><a href="lawyerRegistration.php">Lawyer Registration</a></h3>
-       <p class="skill-desc">Loawyers with credible LLB degree and fulfillment of all requirement can register here</p>
-     </div>
-     <div class="skill-row">
-       <img  class="skill2" src="chillies.png"; style="background-color: #160b8c;">
-       <h3  class="header-skill"><a href="UserRegistration.php">User Registration</a></h3>
-       <p class="skill-desc"> All new Users,Register Here.This website will give you the ease of access and the facility to customise your own services in custom made dashboards</p>
-     </div>
-   </div>
-   <hr>
-   <div class="contact-me">
+  <!-- Registration Section -->
+  <section class="reg-section">
+    <div class="fms-container">
+      <div class="fms-text-center reveal">
+        <span class="fms-badge">Join Us Today</span>
+        <h2 class="fms-title-md" style="margin-top: var(--space-4);">Choose Your Path</h2>
+        <p class="fms-subtitle" style="margin: var(--space-4) auto 0;">Whether you're a legal professional or seeking legal assistance, Forseti has a place for you.</p>
+      </div>
+      <div class="reg-grid" style="margin-top: var(--space-12);">
+        <a href="lawyer-registration.html" class="fms-card reg-card reveal delay-1" style="text-decoration: none;">
+          <img src="computer.png" alt="Lawyer Registration" class="reg-card-img">
+          <h3>Lawyer Registration</h3>
+          <p>Licensed lawyers with credible LLB degrees and fulfilled requirements can register here to connect with clients and expand their practice.</p>
+          <span class="fms-btn fms-btn-primary fms-btn-sm" style="margin-top: var(--space-2);">
+            Register Now <i class="fas fa-arrow-right" style="font-size: 0.75rem;"></i>
+          </span>
+        </a>
+        <a href="user-registration.html" class="fms-card reg-card reveal delay-2" style="text-decoration: none;">
+          <img src="chillies.png" alt="User Registration" class="reg-card-img">
+          <h3>User Registration</h3>
+          <p>New users can register here to access a custom dashboard, manage legal services, and connect with top-tier lawyers effortlessly.</p>
+          <span class="fms-btn fms-btn-primary fms-btn-sm" style="margin-top: var(--space-2);">
+            Register Now <i class="fas fa-arrow-right" style="font-size: 0.75rem;"></i>
+          </span>
+        </a>
+      </div>
+    </div>
+  </section>
 
-    <img class="left" src="cloud.png" alt="cloud">
-     <h2>Get In Touch</h2>
-     <h3>During any convenience , we are with you</h3>
-     <p class="contact-msg">Do not fear because we always Here.</p>
-     <a class="btn" href="saifyavik01@outlook.com">CONTACT US</a>
-   </div>
- </div>
+  <div class="fms-divider" style="max-width: var(--container-max); margin: 0 auto;"></div>
 
+  <!-- Contact Section -->
+  <section class="contact-section">
+    <div class="fms-container">
+      <div class="glass contact-glass reveal">
+        <div class="fms-icon-box" style="margin: 0 auto var(--space-4);">
+          <i class="fas fa-envelope-open-text"></i>
+        </div>
+        <h2 class="fms-title-sm">Get In Touch</h2>
+        <p>During any inconvenience, we are always with you. Do not fear, because we are always here to help.</p>
+        <a href="contact.html" class="fms-btn fms-btn-primary fms-btn-lg">
+          <i class="fas fa-paper-plane"></i>
+          Contact Us
+        </a>
+      </div>
+    </div>
+  </section>
 
- <div class="bottom-container">
-  <a id="fb" href="https://www.facebook.com/" class="fab fa-facebook-square"></a>
-	<a id="tw" href="https://twitter.com/" class="fab fa-twitter-square"></a>
-	<a id="ln" href="https://www.linkedin.com/" class="fab fa-linkedin"></a>
+  <!-- Footer -->
+  <footer class="fms-footer">
+    <div class="fms-container">
+      <div class="fms-footer-grid">
+        <div class="fms-footer-brand">
+          <h3><i class="fas fa-balance-scale" style="margin-right: var(--space-2);"></i> Forseti</h3>
+          <p>Empowering justice through technology. Forseti Management System connects lawyers and clients in a seamless, secure, and transparent environment.</p>
+          <div class="fms-footer-social">
+            <a href="https://www.facebook.com/" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://twitter.com/" target="_blank" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+            <a href="https://www.linkedin.com/" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+          </div>
+        </div>
+        <div class="fms-footer-links">
+          <h4>Platform</h4>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="lawyer-registration.html">Lawyer Registration</a></li>
+            <li><a href="user-registration.html">User Registration</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+        <div class="fms-footer-links">
+          <h4>Account</h4>
+          <ul>
+            <li><a href="user-login.html">User Login</a></li>
+            <li><a href="lawyer-login.html">Lawyer Login</a></li>
+            <li><a href="admin-login.html">Admin Login</a></li>
+          </ul>
+        </div>
+        <div class="fms-footer-links">
+          <h4>Support</h4>
+          <ul>
+            <li><a href="application-form.html">Apply for Service</a></li>
+            <li><a href="ajax.html">Complaint Box</a></li>
+            <li><a href="lawyerfb.html">Feedback</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="fms-footer-bottom">
+        <p>&copy; 2024 Forseti Management System. All rights reserved.</p>
+        <p>Designed with <i class="fas fa-heart" style="color: var(--purple-400);"></i> for justice.</p>
+      </div>
+    </div>
+  </footer>
 
-
-   <p class="copyright">©2024 lokosavik.</p>
-
- </div>
-
- <script src="//code.tidio.co/htstep9cz7ugtkkihexpb3jsu9m0pwie.js" async></script>
-
+  <script src="js/main.js"></script>
+  <script src="//code.tidio.co/htstep9cz7ugtkkihexpb3jsu9m0pwie.js" async></script>
 </body>
-
 </html>
-

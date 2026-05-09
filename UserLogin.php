@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lawyer Registration | Forseti</title>
+    <title>User Login | Forseti</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -42,7 +42,7 @@
         }
         .auth-card {
             width: 100%;
-            max-width: 520px;
+            max-width: 420px;
             padding: var(--space-10);
             animation: scaleIn 0.5s ease-out;
             position: relative;
@@ -74,55 +74,48 @@
             font-size: var(--text-sm);
             color: var(--slate-500);
         }
-        .auth-form-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: var(--space-4);
+        .auth-form .fms-form-group {
+            margin-bottom: var(--space-4);
         }
-        .auth-form-grid .fms-form-group:first-child,
-        .auth-form-grid .fms-form-group:nth-child(2) {
-            grid-column: span 2;
+        .auth-input-wrap {
+            position: relative;
         }
-        .auth-gender {
-            grid-column: span 2;
-            padding: var(--space-4);
-            background: var(--slate-50);
-            border-radius: var(--radius-md);
-            border: 2px solid var(--slate-200);
-        }
-        .auth-gender-label {
-            font-family: var(--font-heading);
-            font-weight: 600;
+        .auth-input-wrap i {
+            position: absolute;
+            left: var(--space-4);
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--slate-400);
             font-size: var(--text-sm);
-            color: var(--slate-700);
-            margin-bottom: var(--space-3);
-            display: block;
+            transition: color var(--transition-base);
         }
-        .auth-gender-options {
-            display: flex;
-            gap: var(--space-6);
-            flex-wrap: wrap;
+        .auth-input-wrap .fms-input {
+            padding-left: var(--space-10);
         }
-        .auth-gender-options label {
-            display: flex;
-            align-items: center;
-            gap: var(--space-2);
-            cursor: pointer;
-            font-size: var(--text-sm);
-            color: var(--slate-700);
-            font-weight: 500;
-        }
-        .auth-gender-options input {
-            width: 18px;
-            height: 18px;
-            accent-color: var(--purple-600);
+        .auth-input-wrap .fms-input:focus + i,
+        .auth-input-wrap .fms-input:focus ~ i {
+            color: var(--purple-500);
         }
         .auth-submit {
-            grid-column: span 2;
             margin-top: var(--space-2);
         }
         .auth-submit .fms-btn {
             width: 100%;
+        }
+        .auth-links {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: var(--space-4);
+        }
+        .auth-links a {
+            font-size: var(--text-sm);
+            color: var(--purple-600);
+            font-weight: 500;
+            transition: color var(--transition-base);
+        }
+        .auth-links a:hover {
+            color: var(--purple-800);
         }
         .auth-footer {
             text-align: center;
@@ -146,74 +139,72 @@
             .auth-card {
                 padding: var(--space-6);
             }
-            .auth-form-grid {
-                grid-template-columns: 1fr;
-            }
-            .auth-form-grid .fms-form-group:first-child,
-            .auth-form-grid .fms-form-group:nth-child(2) {
-                grid-column: span 1;
-            }
-            .auth-gender {
-                grid-column: span 1;
-            }
-            .auth-submit {
-                grid-column: span 1;
-            }
         }
     </style>
 </head>
 <body>
 
+<?php
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $userName = $passWord = "";
+    $userNameErr = $passWordErr = "";
+
+    if (empty($_POST["userName"])) {
+        $userNameErr = "UserName required";
+    } else {
+        $userName = validateInput($_POST["userName"]);
+    }
+    if (empty($_POST["passWord"])) {
+        $passWordErr = "PassWord required";
+    } else {
+        $passWord = validateInput($_POST["passWord"]);
+    }
+}
+
+function validateInput($data) {
+    $data = trim($data);
+    $data = stripslashes($data);
+    $data = htmlspecialchars($data);
+    return $data;
+}
+?>
+
 <main class="auth-page">
     <div class="glass-strong auth-card">
         <div class="auth-header">
             <div class="auth-icon">
-                <i class="fas fa-user-tie"></i>
+                <i class="fas fa-user"></i>
             </div>
-            <h1>Lawyer Registration</h1>
-            <p>Join our network of verified legal professionals</p>
+            <h1>User Login</h1>
+            <p>Welcome back! Access your personalized dashboard.</p>
         </div>
-        <form action="#" method="post" class="fms-form auth-form-grid">
+        <form action="#" method="post" class="fms-form auth-form">
             <div class="fms-form-group">
-                <label class="fms-label"><i class="fas fa-id-card"></i> Full Name</label>
-                <input type="text" class="fms-input" placeholder="Enter your full name" required>
+                <label class="fms-label">Email Address</label>
+                <div class="auth-input-wrap">
+                    <input type="email" class="fms-input" placeholder="Enter your email" required>
+                    <i class="fas fa-envelope"></i>
+                </div>
             </div>
             <div class="fms-form-group">
-                <label class="fms-label"><i class="fas fa-user"></i> Username</label>
-                <input type="text" class="fms-input" placeholder="Choose a username" required>
-            </div>
-            <div class="fms-form-group">
-                <label class="fms-label"><i class="fas fa-envelope"></i> Email Address</label>
-                <input type="email" class="fms-input" placeholder="Enter your email" required>
-            </div>
-            <div class="fms-form-group">
-                <label class="fms-label"><i class="fas fa-phone"></i> Phone Number</label>
-                <input type="tel" class="fms-input" placeholder="Enter your phone number" required>
-            </div>
-            <div class="fms-form-group">
-                <label class="fms-label"><i class="fas fa-lock"></i> Password</label>
-                <input type="password" class="fms-input" placeholder="Create a password" required>
-            </div>
-            <div class="fms-form-group">
-                <label class="fms-label"><i class="fas fa-lock"></i> Confirm Password</label>
-                <input type="password" class="fms-input" placeholder="Re-enter your password" required>
-            </div>
-            <div class="auth-gender">
-                <span class="auth-gender-label"><i class="fas fa-venus-mars" style="margin-right: var(--space-2); color: var(--purple-500);"></i> Gender</span>
-                <div class="auth-gender-options">
-                    <label><input type="radio" name="gender" value="male"> Male</label>
-                    <label><input type="radio" name="gender" value="female"> Female</label>
-                    <label><input type="radio" name="gender" value="other"> Other</label>
+                <label class="fms-label">Password</label>
+                <div class="auth-input-wrap">
+                    <input type="password" class="fms-input" placeholder="Enter your password" required>
+                    <i class="fas fa-lock"></i>
                 </div>
             </div>
             <div class="auth-submit">
                 <button type="submit" class="fms-btn fms-btn-primary fms-btn-lg">
-                    <i class="fas fa-user-plus"></i> Register Now
+                    <i class="fas fa-sign-in-alt"></i> Log In
                 </button>
+            </div>
+            <div class="auth-links">
+                <a href="#">Forgot Password?</a>
+                <a href="UserRegistration.php">Sign Up</a>
             </div>
         </form>
         <div class="auth-footer">
-            <p>Already have an account? <a href="lawyer-login.html">Log In</a></p>
+            <p>Not a user? <a href="lawyer-login.html">Lawyer Login</a> or <a href="admin-login.html">Admin Login</a></p>
         </div>
     </div>
 </main>

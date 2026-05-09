@@ -2,77 +2,136 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Simple HTML Form</title>
-    <link rel="stylesheet" href="style.css">
-    <script src="validator.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apply for Service | Forseti</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="css/design-system.css">
+    <style>
+        .form-page {
+            min-height: 100vh;
+            padding: calc(var(--header-height) + var(--space-12)) var(--space-4) var(--space-12);
+        }
+        .form-card {
+            max-width: 640px;
+            margin: 0 auto;
+            padding: var(--space-10);
+            animation: scaleIn 0.5s ease-out;
+        }
+        .form-header {
+            text-align: center;
+            margin-bottom: var(--space-8);
+        }
+        .form-header h1 {
+            font-size: var(--text-3xl);
+            color: var(--purple-900);
+            margin-bottom: var(--space-2);
+        }
+        .form-header p {
+            color: var(--slate-500);
+        }
+        .form-nav {
+            display: flex;
+            justify-content: center;
+            gap: var(--space-4);
+            margin-top: var(--space-8);
+            flex-wrap: wrap;
+        }
+        @media (max-width: 480px) {
+            .form-card {
+                padding: var(--space-6);
+            }
+        }
+    </style>
 </head>
-<body>
-<form name="contactForm" onsubmit="return validateForm()" action="confirmation.php" method="post">
-    <h2> Upay Application Form</h2>
-    <div class="row">
-        <label>Full Name</label>
-        <input type="text" name="name">
-        <div class="error" id="nameErr"></div>
-    </div>
-    <div class="row">
-        <label>Email Address</label>
-        <input type="text" name="email">
-        <div class="error" id="emailErr"></div>
-    </div>
-    <div class="row">
-        <label>Mobile Number</label>
-        <input type="text" name="mobile" maxlength="10">
-        <div class="error" id="mobileErr"></div>
-    </div>
-    <div class="row">
-        <label>Location</label>
-        <select name="country">
-            <option>Select</option>
-            <option>Dhaka</option>
-            <option>Chittagong</option>
-            <option>Gazipur</option>
-            <option>Khulna</option>
-        </select> 
-        <div class="error" id="countryErr"></div>
-    </div>
-    <div class="row">
-        <label>Gender</label>
-        <div class="form-inline">
-            <label><input type="radio" name="gender" value="male"> Male</label>
-            <label><input type="radio" name="gender" value="female"> Female</label> 
+<body class="fms-page">
+
+    <nav class="fms-nav scrolled">
+        <div class="fms-nav-inner">
+            <a href="index.html" class="fms-logo">
+                <i class="fas fa-balance-scale" style="font-size: 1.5rem; color: var(--purple-600);"></i>
+                Forseti
+            </a>
+            <div class="fms-nav-links">
+                <a href="index.html" class="fms-nav-link">Home</a>
+                <a href="application-form.html" class="fms-nav-link active">Apply</a>
+                <a href="contact.html" class="fms-nav-link">Contact</a>
+            </div>
         </div>
-        <div class="error" id="genderErr"></div>
-    </div>
-    <div class="row">
-        <label>Hobbies <i>(Optional)</i></label>
-        <div class="form-inline">
-            <label><input type="checkbox" name="hobbies[]" value="sports"> Sports</label>
-            <label><input type="checkbox" name="hobbies[]" value="movies"> Movies</label>
-            <label><input type="checkbox" name="hobbies[]" value="music"> Music</label>  
+    </nav>
+
+    <main class="form-page">
+        <div class="glass form-card">
+            <div class="form-header">
+                <div class="fms-icon-box" style="margin: 0 auto var(--space-4);">
+                    <i class="fas fa-file-signature"></i>
+                </div>
+                <h1>Apply for Service</h1>
+                <p>Fill out the form below and our team will reach out to you shortly.</p>
+            </div>
+
+            <form name="contactForm" onsubmit="return validateForm()" action="confirmation.php" method="post" class="fms-form">
+                <div class="fms-form-group">
+                    <label class="fms-label"><i class="fas fa-user"></i> Full Name</label>
+                    <input type="text" name="name" class="fms-input" placeholder="Enter your full name">
+                    <div class="fms-error" id="nameErr"></div>
+                </div>
+                <div class="fms-form-group">
+                    <label class="fms-label"><i class="fas fa-envelope"></i> Email Address</label>
+                    <input type="text" name="email" class="fms-input" placeholder="Enter your email">
+                    <div class="fms-error" id="emailErr"></div>
+                </div>
+                <div class="fms-form-group">
+                    <label class="fms-label"><i class="fas fa-mobile-alt"></i> Mobile Number</label>
+                    <input type="text" name="mobile" class="fms-input" placeholder="Enter 10-digit mobile number" maxlength="10">
+                    <div class="fms-error" id="mobileErr"></div>
+                </div>
+                <div class="fms-form-group">
+                    <label class="fms-label"><i class="fas fa-map-marker-alt"></i> Location</label>
+                    <select name="country" class="fms-select">
+                        <option value="">Select your city</option>
+                        <option>Dhaka</option>
+                        <option>Chittagong</option>
+                        <option>Gazipur</option>
+                        <option>Khulna</option>
+                    </select>
+                    <div class="fms-error" id="countryErr"></div>
+                </div>
+                <div class="fms-form-group">
+                    <label class="fms-label"><i class="fas fa-venus-mars"></i> Gender</label>
+                    <div class="fms-radio-group">
+                        <label class="fms-radio"><input type="radio" name="gender" value="male"> Male</label>
+                        <label class="fms-radio"><input type="radio" name="gender" value="female"> Female</label>
+                    </div>
+                    <div class="fms-error" id="genderErr"></div>
+                </div>
+                <div class="fms-form-group">
+                    <label class="fms-label"><i class="fas fa-heart"></i> Hobbies <span style="font-weight: 400; color: var(--slate-400);">(Optional)</span></label>
+                    <div class="fms-checkbox-group">
+                        <label class="fms-checkbox"><input type="checkbox" name="hobbies[]" value="sports"> Sports</label>
+                        <label class="fms-checkbox"><input type="checkbox" name="hobbies[]" value="movies"> Movies</label>
+                        <label class="fms-checkbox"><input type="checkbox" name="hobbies[]" value="music"> Music</label>
+                    </div>
+                </div>
+                <button type="submit" class="fms-btn fms-btn-primary fms-btn-lg" style="width: 100%;">
+                    <i class="fas fa-paper-plane"></i> Submit Application
+                </button>
+            </form>
+
+            <div class="form-nav">
+                <a href="contact.html" class="fms-btn fms-btn-secondary fms-btn-sm">
+                    <i class="fas fa-envelope"></i> Contact Us
+                </a>
+                <a href="ajax.html" class="fms-btn fms-btn-ghost fms-btn-sm">
+                    <i class="fas fa-exclamation-circle"></i> Problem Case Box
+                </a>
+            </div>
         </div>
-    </div>        
-    <div class="row">
-        <input type="submit" value="Submit">
-    </div>
-</form>
+    </main>
 
-<a href="contact.php"> contact With Us</a>
-
-
-<a href="ajax.html"> Problem Case Box</a>
-
-<style>
-html,body{
-    display: gird;
-    height: 100%;
-    width: 100%;
-    place-items: center;
-    text-align: center;
-  background-image: url('asset/b1.jpg');
-  
-}
-  
-</style>
-
+    <script src="validator.js"></script>
+    <script src="js/main.js"></script>
 </body>
 </html>
